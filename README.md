@@ -1,3 +1,0 @@
-# ZooInfo
-ZooInfo
-TESTE
