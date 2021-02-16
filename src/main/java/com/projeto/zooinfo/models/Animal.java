@@ -5,13 +5,23 @@
  */
 package com.projeto.zooinfo.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author mathe
- */
-public class Animal extends Especie{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Animal extends Especie implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	private long codigoId;
+	
     private int codigoAnimal;
     private String nomeAnimal;
     private Date dataNascimento;
@@ -25,23 +35,35 @@ public class Animal extends Especie{
         this.alimentacao = alimentacao;
     }
 
-    public int getCodigo() {
-        return codigoAnimal;
-    }
+ 
+    public long getCodigoId() {
+		return codigoId;
+	}
 
-    public void setCodigo(int codigo) {
-        this.codigoAnimal = codigo;
-    }
+    public void setCodigoId(long codigoId) {
+		this.codigoId = codigoId;
+	}
 
-    public String getNome() {
-        return nomeAnimal;
-    }
+	
+	public int getCodigoAnimal() {
+		return codigoAnimal;
+	}
 
-    public void setNome(String nome) {
-        this.nomeAnimal = nome;
-    }
+	public void setCodigoAnimal(int codigoAnimal) {
+		this.codigoAnimal = codigoAnimal;
+	}
 
-    public Date getDataNascimento() {
+	
+	public String getNomeAnimal() {
+		return nomeAnimal;
+	}
+
+	public void setNomeAnimal(String nomeAnimal) {
+		this.nomeAnimal = nomeAnimal;
+	}
+
+	
+	public Date getDataNascimento() {
         return dataNascimento;
     }
 
@@ -49,6 +71,7 @@ public class Animal extends Especie{
         this.dataNascimento = dataNascimento;
     }
 
+    
     public Alimentacao getAlimentacao() {
         return alimentacao;
     }
