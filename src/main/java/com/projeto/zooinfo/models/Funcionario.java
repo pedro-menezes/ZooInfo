@@ -5,16 +5,23 @@
  */
 package com.projeto.zooinfo.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author mathe
  */
-public class Funcionario {
-    private String nome;
+@Entity
+public class Funcionario implements Serializable{
+    
+    @Id
     private String cpf;
+    
+    private String nome;
     private Date dataNascimento;
     private Date dataAdmissao;
     private double salario;

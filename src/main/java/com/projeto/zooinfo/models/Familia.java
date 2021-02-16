@@ -5,17 +5,27 @@
  */
 package com.projeto.zooinfo.models;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author mathe
  */
-public class Familia extends Classe{
+@Entity
+public class Familia implements Serializable{
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int codigoFamilia;
+    
     private String nomeFamilia;
     private String descricaoFamilia;
 
-    public Familia(int codigoFamilia, String nome, String descricao, int codigoClasse, String nomeClasse, String descricaoClasse) {
-        super(codigoClasse, nomeClasse, descricaoClasse);
+    public Familia(int codigoFamilia, String nome, String descricao) {
         this.codigoFamilia = codigoFamilia;
         this.nomeFamilia = nome;
         this.descricaoFamilia = descricao;
