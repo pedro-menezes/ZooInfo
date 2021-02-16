@@ -12,16 +12,16 @@ import com.projeto.zooinfo.repository.AnimalRepository;
 public class AnimalControl {
     
 	@Autowired
-	private AnimalRepository er;
+	private AnimalRepository ar;
 	
 	@RequestMapping(value="/CadastrarAnimal", method=RequestMethod.GET)
 	public String form() {
-		return "evento/formEvento";
+		return "animal/formAnimal";
 	}
 	
 	@RequestMapping(value="/CadastrarAnimal", method=RequestMethod.POST)
 	public String form(Animal animal) {
-		er.save(animal);
+		ar.save(animal);
 		return "redirect:/CadastrarAnimal";
 	}
 }
