@@ -7,10 +7,7 @@ package com.projeto.zooinfo.models;
 
 import java.util.Date;
 
-/**
- *
- * @author mathe
- */
+
 public class Venda {
     private Date dataVenda;
     private Funcionario funcionario;

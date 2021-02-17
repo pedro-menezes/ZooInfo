@@ -5,23 +5,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.projeto.zooinfo.models.Usuario;
-import com.projeto.zooinfo.repository.UsuarioRepository;
+import com.projeto.zooinfo.models.Departamento;
+import com.projeto.zooinfo.repository.DepartamentoRepository;
 
 @Controller
-public class UsuarioControl {
+public class DepartamentoControl {
 
 	@Autowired
-	private UsuarioRepository ur;
+	private DepartamentoRepository dr;
 	
-	@RequestMapping(value="/CadastrarUsuario", method=RequestMethod.GET)
+	@RequestMapping(value="/CadastrarDepartamento", method=RequestMethod.GET)
 	public String form() {
-		return "usuario/FormUsuario";
+		return "departamento/FormDepartamento";
 	}
 	
-	@RequestMapping(value="/CadastrarUsuario", method=RequestMethod.POST)
-	public String form(Usuario usuario) {
-		ur.save(usuario);
-		return "redirect:/CadastrarAnimal";
+	@RequestMapping(value="/CadastrarDepartamento", method=RequestMethod.POST)
+	public String form(Departamento departamento) {
+		dr.save(departamento);
+		return "redirect:/CadastrarDepartamento";
 	}
 }

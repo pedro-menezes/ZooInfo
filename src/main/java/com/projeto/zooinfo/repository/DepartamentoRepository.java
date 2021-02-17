@@ -2,8 +2,8 @@ package com.projeto.zooinfo.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.projeto.zooinfo.models.Usuario;
+import com.projeto.zooinfo.models.Departamento;
 
-public interface UsuarioRepository extends CrudRepository<Usuario, String> {
+public interface DepartamentoRepository extends CrudRepository<Departamento, String> {
 
 }

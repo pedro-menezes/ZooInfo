@@ -19,7 +19,7 @@ public class VendaControl {
 		return "venda/formVenda";
 	}
 	
-	@RequestMapping(value="/CadastrarAnimal", method=RequestMethod.POST)
+	@RequestMapping(value="/CadastrarVenda", method=RequestMethod.POST)
 	public String form(Venda venda) {
 		vr.save(venda);
 		return "redirect:/CadastrarVenda";
