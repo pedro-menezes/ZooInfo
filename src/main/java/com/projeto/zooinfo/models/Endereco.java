@@ -5,14 +5,24 @@
  */
 package com.projeto.zooinfo.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author mathe
  */
-class Endereco {
+@Entity
+class Endereco implements Serializable{
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int codigoEndereco;
+    
     private String logradouro;
     private int numero;
     private String bairro;

@@ -14,56 +14,51 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Animal extends Especie implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long codigoId;
-	
+public class Animal implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long codigoId;
+
     private int codigoAnimal;
     private String nomeAnimal;
     private Date dataNascimento;
     private Alimentacao alimentacao;
 
-    public Animal(int codigoAnimal, String nomeAnimal, Date dataNascimento, Alimentacao alimentacao, int codigoEspecie, String nomeEspecie, String descricaoEspecie, int codigoFamilia, String nome, String descricao, int codigoClasse, String nomeClasse, String descricaoClasse) {
-        super(codigoEspecie, nomeEspecie, descricaoEspecie, codigoFamilia, nome, descricao, codigoClasse, nomeClasse, descricaoClasse);
+    public Animal(int codigoAnimal, String nomeAnimal, Date dataNascimento, Alimentacao alimentacao) {
         this.codigoAnimal = codigoAnimal;
         this.nomeAnimal = nomeAnimal;
         this.dataNascimento = dataNascimento;
         this.alimentacao = alimentacao;
     }
 
- 
     public long getCodigoId() {
-		return codigoId;
-	}
+        return codigoId;
+    }
 
     public void setCodigoId(long codigoId) {
-		this.codigoId = codigoId;
-	}
+        this.codigoId = codigoId;
+    }
 
-	
-	public int getCodigoAnimal() {
-		return codigoAnimal;
-	}
+    public int getCodigoAnimal() {
+        return codigoAnimal;
+    }
 
-	public void setCodigoAnimal(int codigoAnimal) {
-		this.codigoAnimal = codigoAnimal;
-	}
+    public void setCodigoAnimal(int codigoAnimal) {
+        this.codigoAnimal = codigoAnimal;
+    }
 
-	
-	public String getNomeAnimal() {
-		return nomeAnimal;
-	}
+    public String getNomeAnimal() {
+        return nomeAnimal;
+    }
 
-	public void setNomeAnimal(String nomeAnimal) {
-		this.nomeAnimal = nomeAnimal;
-	}
+    public void setNomeAnimal(String nomeAnimal) {
+        this.nomeAnimal = nomeAnimal;
+    }
 
-	
-	public Date getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
@@ -71,7 +66,6 @@ public class Animal extends Especie implements Serializable{
         this.dataNascimento = dataNascimento;
     }
 
-    
     public Alimentacao getAlimentacao() {
         return alimentacao;
     }
@@ -79,6 +73,4 @@ public class Animal extends Especie implements Serializable{
     public void setAlimentacao(Alimentacao alimentacao) {
         this.alimentacao = alimentacao;
     }
-    
-    
 }

@@ -5,14 +5,17 @@
  */
 package com.projeto.zooinfo.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Entity;
 
 /**
  *
  * @author mathe
  */
-public class Gerente extends Funcionario{
+@Entity
+public class Gerente extends Funcionario implements Serializable{
     
     private float bonusSalarial;
 

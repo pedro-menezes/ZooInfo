@@ -5,12 +5,19 @@
  */
 package com.projeto.zooinfo.models;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author mathe
  */
-public class Usuario {
+@Entity
+public class Usuario implements Serializable{
+    @Id
     private String user;
+    
     private String senha;
 
     public Usuario(String user, String senha) {
