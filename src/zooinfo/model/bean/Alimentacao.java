@@ -20,23 +20,26 @@ public class Alimentacao implements Serializable{
     
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int codigoAlimentacao;
+    private Integer codigo;
     
     private String descricao;
     private float quantidade;
 
-    public Alimentacao(int codigo, String descricao, float quantidade) {
-        this.codigoAlimentacao = codigo;
+    public Alimentacao() {
+    }
+
+    public Alimentacao(Integer codigoAlimentacao, String descricao, float quantidade) {
+        this.codigo = codigoAlimentacao;
         this.descricao = descricao;
         this.quantidade = quantidade;
     }
 
-    public int getCodigo() {
-        return codigoAlimentacao;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigoAlimentacao = codigo;
+    public void setCodigo(Integer codigoAlimentacao) {
+        this.codigo = codigoAlimentacao;
     }
 
     public String getDescricao() {
@@ -54,14 +57,4 @@ public class Alimentacao implements Serializable{
     public void setQuantidade(float quantidade) {
         this.quantidade = quantidade;
     }
-
-    public int getCodigoAlimentacao() {
-        return codigoAlimentacao;
-    }
-
-    public void setCodigoAlimentacao(int codigoAlimentacao) {
-        this.codigoAlimentacao = codigoAlimentacao;
-    }
-    
-    
 }

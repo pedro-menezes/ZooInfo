@@ -8,24 +8,25 @@ package zooinfo.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
-import zooinfo.model.bean.Login;
+import zooinfo.model.bean.Departamento;
 
 /**
  *
  * @author pedro-menezes
  */
-public class LoginDAO {
+public class DepartamentoDAO implements CRUD<Departamento, Integer>{
 
-    public Login save(Login login) {
+   @Override
+   public Departamento save(Departamento departamento) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
         try {
             em.getTransaction().begin();
-            if (login.getUser() == null) {
-                em.persist(login);
+            if (departamento.getCodigo() == null) {
+                em.merge(departamento);
             } else {
-                em.merge(login);
+                em.persist(departamento);
             }
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -35,48 +36,51 @@ public class LoginDAO {
             em.close();
         }
 
-        return login;
+        return departamento;
     }
 
-    public Login findById(String user) {
+   @Override
+    public Departamento findById(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
+        Departamento departamento = null;
 
         try {
-            login = em.find(Login.class, user);
+            departamento = em.find(Departamento.class, departamento);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             em.close();
         }
-        return login;
+        return departamento;
     }
 
-    public List<Login> findAll() {
+   @Override
+    public List<Departamento> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
-        List<Login> logins = null;
+        List<Departamento> departamento = null;
 
         try {
-            logins = em.createQuery("from Login l").getResultList();
+            departamento = em.createQuery("from Departamento d").getResultList();
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             em.close();
         }
 
-        return logins;
+        return departamento;
     }
 
-    public Login remove(String user) {
+   @Override
+    public Departamento remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
+        Departamento departamento = null;
 
         try {
-            login = em.find(Login.class, user);
+            departamento = em.find(Departamento.class, codigo);
             em.getTransaction().begin();
-            em.remove(login);
+            em.remove(departamento);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e);
@@ -84,6 +88,6 @@ public class LoginDAO {
         } finally {
             em.close();
         }
-        return login;
+        return departamento;
     }
 }

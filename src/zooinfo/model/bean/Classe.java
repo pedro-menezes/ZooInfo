@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,22 +21,29 @@ public class Classe implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigoClasse;
+    private Integer codigoClasse;
     
     private String nomeClasse;
     private String descricaoClasse;
+    
+    @ManyToOne
+    private Familia familia;
 
-    public Classe(int codigoClasse, String nomeClasse, String descricaoClasse) {
+    public Classe() {
+    }
+
+    public Classe(Integer codigoClasse, String nomeClasse, String descricaoClasse, Familia familia) {
         this.codigoClasse = codigoClasse;
         this.nomeClasse = nomeClasse;
         this.descricaoClasse = descricaoClasse;
+        this.familia = familia;
     }
 
-    public int getCodigoClasse() {
+    public Integer getCodigo() {
         return codigoClasse;
     }
 
-    public void setCodigoClasse(int codigoClasse) {
+    public void setCodigo(Integer codigoClasse) {
         this.codigoClasse = codigoClasse;
     }
 
@@ -55,6 +63,11 @@ public class Classe implements Serializable{
         this.descricaoClasse = descricaoClasse;
     }
 
-    
-    
+    public Familia getFamilia() {
+        return familia;
+    }
+
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
+    }
 }

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -21,23 +22,28 @@ public class Departamento implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigoDepto;
+    private Integer codigo;
     
     private String nomeDepto;
-    private ArrayList<Funcionario> funcionarios;
-    private Funcionario responsavel;
+    
+    @ManyToOne
+    private Funcionario funcionarios;
 
-    public Departamento(int codigoDepto, String nomeDepto) {
-        this.codigoDepto = codigoDepto;
+    public Departamento() {
+    }
+
+    public Departamento(Integer codigoDepto, String nomeDepto, Funcionario funcionarios) {
+        this.codigo = codigoDepto;
         this.nomeDepto = nomeDepto;
+        this.funcionarios = funcionarios;
     }
 
-    public int getCodigoDepto() {
-        return codigoDepto;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoDepto(int codigoDepto) {
-        this.codigoDepto = codigoDepto;
+    public void setCodigo(Integer codigoDepto) {
+        this.codigo = codigoDepto;
     }
 
     public String getNomeDepto() {
@@ -48,20 +54,11 @@ public class Departamento implements Serializable{
         this.nomeDepto = nomeDepto;
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
+    public Funcionario getFuncionarios() {
         return funcionarios;
     }
 
-    public void setFuncionarios(ArrayList<Funcionario> funcionarios) { // função add funcionários
+    public void setFuncionarios(Funcionario funcionarios) {
         this.funcionarios = funcionarios;
     }
-
-    public Funcionario getResponsavel() {
-        return responsavel;
-    }
-
-    public void setResponsavel(Funcionario responsavel) {
-        this.responsavel = responsavel;
-    }
-
 }

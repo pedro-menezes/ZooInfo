@@ -8,24 +8,25 @@ package zooinfo.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
-import zooinfo.model.bean.Login;
+import zooinfo.model.bean.Familia;
 
 /**
  *
  * @author pedro-menezes
  */
-public class LoginDAO {
+public class FamiliaDAO implements CRUD<Familia, Integer>{
 
-    public Login save(Login login) {
+   @Override
+   public Familia save(Familia familia) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
         try {
             em.getTransaction().begin();
-            if (login.getUser() == null) {
-                em.persist(login);
+            if (familia.getCodigo() == null) {
+                em.merge(familia);
             } else {
-                em.merge(login);
+                em.persist(familia);
             }
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -35,48 +36,51 @@ public class LoginDAO {
             em.close();
         }
 
-        return login;
+        return familia;
     }
 
-    public Login findById(String user) {
+   @Override
+    public Familia findById(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
+        Familia familia = null;
 
         try {
-            login = em.find(Login.class, user);
+            familia = em.find(Familia.class, familia);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             em.close();
         }
-        return login;
+        return familia;
     }
 
-    public List<Login> findAll() {
+   @Override
+    public List<Familia> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
-        List<Login> logins = null;
+        List<Familia> familias = null;
 
         try {
-            logins = em.createQuery("from Login l").getResultList();
+            familias = em.createQuery("from Familia e").getResultList();
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             em.close();
         }
 
-        return logins;
+        return familias;
     }
 
-    public Login remove(String user) {
+   @Override
+    public Familia remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
+        Familia familia = null;
 
         try {
-            login = em.find(Login.class, user);
+            familia = em.find(Familia.class, codigo);
             em.getTransaction().begin();
-            em.remove(login);
+            em.remove(familia);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e);
@@ -84,6 +88,6 @@ public class LoginDAO {
         } finally {
             em.close();
         }
-        return login;
+        return familia;
     }
 }

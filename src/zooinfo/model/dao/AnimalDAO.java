@@ -8,75 +8,27 @@ package zooinfo.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
-import zooinfo.model.bean.Login;
+import zooinfo.model.bean.Animal;
 
 /**
  *
  * @author pedro-menezes
  */
-public class LoginDAO {
+public class AnimalDAO implements CRUD<Animal, Integer>{
 
-    public Login save(Login login) {
+    @Override
+    public Animal save(Animal animal) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
         try {
-            em.getTransaction().begin();
-            if (login.getUser() == null) {
-                em.persist(login);
+            if (animal.getCodigo() == null) {
+                em.persist(animal);
             } else {
-                em.merge(login);
+                em.merge(animal);
             }
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            System.err.println(e);
-        } finally {
-            em.close();
-        }
-
-        return login;
-    }
-
-    public Login findById(String user) {
-        EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
-
-        try {
-            login = em.find(Login.class, user);
-        } catch (Exception e) {
-            System.err.println(e);
-        } finally {
-            em.close();
-        }
-        return login;
-    }
-
-    public List<Login> findAll() {
-
-        EntityManager em = new ConnectionFactory().getConnection();
-        List<Login> logins = null;
-
-        try {
-            logins = em.createQuery("from Login l").getResultList();
-        } catch (Exception e) {
-            System.err.println(e);
-        } finally {
-            em.close();
-        }
-
-        return logins;
-    }
-
-    public Login remove(String user) {
-
-        EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
-
-        try {
-            login = em.find(Login.class, user);
             em.getTransaction().begin();
-            em.remove(login);
+            em.persist(animal);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e);
@@ -84,6 +36,61 @@ public class LoginDAO {
         } finally {
             em.close();
         }
-        return login;
+
+        return animal;
+    }
+
+    @Override
+    public Animal findById(Integer codigo) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+        Animal animal = null;
+
+        try {
+            animal = em.find(Animal.class, codigo);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            em.close();
+        }
+
+        return animal;
+    }
+    
+    @Override
+    public List<Animal> findAll() {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+        List<Animal> alimentacao = null;
+
+        try {
+            alimentacao = em.createQuery("from Animal a").getResultList();
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            em.close();
+        }
+
+        return alimentacao;
+    }
+
+    @Override
+    public Animal remove(Integer codigo) {
+        
+        EntityManager em = new ConnectionFactory().getConnection();
+        Animal animal = null;
+
+        try {
+            animal = em.find(Animal.class, codigo);
+            em.getTransaction().begin();
+            em.remove(animal);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        return animal;
     }
 }

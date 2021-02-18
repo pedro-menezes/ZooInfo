@@ -6,7 +6,6 @@
 package zooinfo.model.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Entity;
 
@@ -19,8 +18,15 @@ public class Gerente extends Funcionario implements Serializable{
     
     private float bonusSalarial;
 
-    public Gerente(float bonusSalarial, String nome, String cpf, Date dataNascimento, Date dataAdmissao, double salario, char sexo, ArrayList<Endereco> endereco) {
-        super(nome, cpf, dataNascimento, dataAdmissao, salario, sexo, endereco);
+    public Gerente() {
+    }
+
+    public Gerente(float bonusSalarial) {
+        this.bonusSalarial = bonusSalarial;
+    }
+
+    public Gerente(float bonusSalarial, String cpf, String nome, Date dataNascimento, Date dataAdmissao, double salario, char sexo, Login login, Endereco endereco, Venda vendas) {
+        super(cpf, nome, dataNascimento, dataAdmissao, salario, sexo, login, endereco, vendas);
         this.bonusSalarial = bonusSalarial;
     }
 

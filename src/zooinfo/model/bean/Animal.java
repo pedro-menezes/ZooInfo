@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Animal implements Serializable {
@@ -20,34 +21,30 @@ public class Animal implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long codigoId;
+    private Integer codigo;
 
-    private int codigoAnimal;
     private String nomeAnimal;
     private Date dataNascimento;
+
+    @ManyToOne
     private Alimentacao alimentacao;
 
-    public Animal(int codigoAnimal, String nomeAnimal, Date dataNascimento, Alimentacao alimentacao) {
-        this.codigoAnimal = codigoAnimal;
+    public Animal() {
+    }
+
+    public Animal(Integer codigo, String nomeAnimal, Date dataNascimento, Alimentacao alimentacao) {
+        this.codigo = codigo;
         this.nomeAnimal = nomeAnimal;
         this.dataNascimento = dataNascimento;
         this.alimentacao = alimentacao;
     }
 
-    public long getCodigoId() {
-        return codigoId;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoId(long codigoId) {
-        this.codigoId = codigoId;
-    }
-
-    public int getCodigoAnimal() {
-        return codigoAnimal;
-    }
-
-    public void setCodigoAnimal(int codigoAnimal) {
-        this.codigoAnimal = codigoAnimal;
+    public void setCodigo(Integer codigoId) {
+        this.codigo = codigoId;
     }
 
     public String getNomeAnimal() {

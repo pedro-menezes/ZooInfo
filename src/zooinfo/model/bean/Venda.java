@@ -11,22 +11,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Venda implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigo;
+    private Integer codigo;
     
     private Date dataVenda;
-    private Funcionario funcionario;
     private boolean usado;
 
-    public Venda(int codigo, Date dataVenda, Funcionario funcionario, boolean usado) {
+    public Venda() {
+    }
+
+    public Venda(Integer codigo, Date dataVenda, boolean usado) {
+        this.codigo = codigo;
         this.dataVenda = dataVenda;
-        this.funcionario = funcionario;
         this.usado = usado;
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -38,27 +48,11 @@ public class Venda implements Serializable{
         this.dataVenda = dataVenda;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-
     public boolean isUsado() {
         return usado;
     }
 
     public void setUsado(boolean usado) {
         this.usado = usado;
-    }    
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
     }
 }

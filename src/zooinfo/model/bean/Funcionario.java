@@ -6,10 +6,11 @@
 package zooinfo.model.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,20 +27,39 @@ public class Funcionario implements Serializable{
     private Date dataAdmissao;
     private double salario;
     private char sexo;
-    private ArrayList<Endereco> endereco;
+    
+    @OneToOne
     private Login login;
 
-    public Funcionario(String nome, String cpf, Date dataNascimento, Date dataAdmissao, double salario, char sexo, ArrayList<Endereco> endereco) {
-        this.nome = nome;
+    @OneToOne
+    private Endereco endereco;
+    
+    @ManyToOne
+    private Venda vendas;
+
+    public Funcionario() {
+    }
+
+    public Funcionario(String cpf, String nome, Date dataNascimento, Date dataAdmissao, double salario, char sexo, Login login, Endereco endereco, Venda vendas) {
         this.cpf = cpf;
+        this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.dataAdmissao = dataAdmissao;
         this.salario = salario;
         this.sexo = sexo;
+        this.login = login;
         this.endereco = endereco;
+        this.vendas = vendas;
     }
-    
-    
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -47,11 +67,6 @@ public class Funcionario implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getCpf() {
-        return cpf;
-    }
-
 
     public Date getDataNascimento() {
         return dataNascimento;
@@ -85,19 +100,27 @@ public class Funcionario implements Serializable{
         this.sexo = sexo;
     }
 
-    public ArrayList<Endereco> getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(ArrayList<Endereco> endereco) {
-        this.endereco = endereco;
-    }
-    
     public Login getLogin() {
         return login;
     }
 
     public void setLogin(Login login) {
         this.login = login;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Venda getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(Venda vendas) {
+        this.vendas = vendas;
     }
 }

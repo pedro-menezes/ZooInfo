@@ -8,24 +8,25 @@ package zooinfo.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
-import zooinfo.model.bean.Login;
+import zooinfo.model.bean.Alimentacao;
 
 /**
  *
  * @author pedro-menezes
  */
-public class LoginDAO {
+public class AlimentacaoDAO implements CRUD<Alimentacao, Integer>{
 
-    public Login save(Login login) {
+    @Override
+    public Alimentacao save(Alimentacao alimentacao) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
         try {
             em.getTransaction().begin();
-            if (login.getUser() == null) {
-                em.persist(login);
+            if (alimentacao.getCodigo() == null) {
+                em.merge(alimentacao);
             } else {
-                em.merge(login);
+                em.persist(alimentacao);
             }
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -35,48 +36,51 @@ public class LoginDAO {
             em.close();
         }
 
-        return login;
+        return alimentacao;
     }
 
-    public Login findById(String user) {
+    @Override
+    public Alimentacao findById(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
+        Alimentacao alimentacao = null;
 
         try {
-            login = em.find(Login.class, user);
+            alimentacao = em.find(Alimentacao.class, alimentacao);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             em.close();
         }
-        return login;
+        return alimentacao;
     }
 
-    public List<Login> findAll() {
+    @Override
+    public List<Alimentacao> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
-        List<Login> logins = null;
+        List<Alimentacao> alimentacao = null;
 
         try {
-            logins = em.createQuery("from Login l").getResultList();
+            alimentacao = em.createQuery("from Alimentacao a").getResultList();
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             em.close();
         }
 
-        return logins;
+        return alimentacao;
     }
 
-    public Login remove(String user) {
+    @Override
+    public Alimentacao remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
+        Alimentacao alimentacao = null;
 
         try {
-            login = em.find(Login.class, user);
+            alimentacao = em.find(Alimentacao.class, codigo);
             em.getTransaction().begin();
-            em.remove(login);
+            em.remove(alimentacao);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e);
@@ -84,6 +88,6 @@ public class LoginDAO {
         } finally {
             em.close();
         }
-        return login;
+        return alimentacao;
     }
 }

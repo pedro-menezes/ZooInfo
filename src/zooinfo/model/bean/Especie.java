@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,39 +21,53 @@ public class Especie implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigoEspecie;
+    private Integer codigo;
     
     private String nomeEspecie;
     private String descricaoEspecie;
 
-    public Especie(int codigoEspecie, String nomeEspecie, String descricaoEspecie) {
-        this.codigoEspecie = codigoEspecie;
+    @ManyToOne
+    private Animal animal;
+
+    public Especie() {
+    }
+
+    public Especie(Integer codigoEspecie, String nomeEspecie, String descricaoEspecie, Animal animal) {
+        this.codigo = codigoEspecie;
         this.nomeEspecie = nomeEspecie;
         this.descricaoEspecie = descricaoEspecie;
+        this.animal = animal;
     }
 
-    public int getCodigo() {
-        return codigoEspecie;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigoEspecie = codigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNome() {
+    public String getNomeEspecie() {
         return nomeEspecie;
     }
 
-    public void setNome(String nome) {
-        this.nomeEspecie = nome;
+    public void setNomeEspecie(String nomeEspecie) {
+        this.nomeEspecie = nomeEspecie;
     }
 
-    public String getDescricao() {
+    public String getDescricaoEspecie() {
         return descricaoEspecie;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricaoEspecie = descricao;
+    public void setDescricaoEspecie(String descricaoEspecie) {
+        this.descricaoEspecie = descricaoEspecie;
     }
 
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
 }

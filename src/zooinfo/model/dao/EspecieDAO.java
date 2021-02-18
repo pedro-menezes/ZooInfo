@@ -8,24 +8,25 @@ package zooinfo.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
-import zooinfo.model.bean.Login;
+import zooinfo.model.bean.Especie;
 
 /**
  *
  * @author pedro-menezes
  */
-public class LoginDAO {
+public class EspecieDAO implements CRUD<Especie, Integer> {
 
-    public Login save(Login login) {
+    @Override
+    public Especie save(Especie especie) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
         try {
             em.getTransaction().begin();
-            if (login.getUser() == null) {
-                em.persist(login);
+            if (especie.getCodigo() == null) {
+                em.merge(especie);
             } else {
-                em.merge(login);
+                em.persist(especie);
             }
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -35,48 +36,51 @@ public class LoginDAO {
             em.close();
         }
 
-        return login;
+        return especie;
     }
 
-    public Login findById(String user) {
+    @Override
+    public Especie findById(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
+        Especie especie = null;
 
         try {
-            login = em.find(Login.class, user);
+            especie = em.find(Especie.class, especie);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             em.close();
         }
-        return login;
+        return especie;
     }
 
-    public List<Login> findAll() {
+    @Override
+    public List<Especie> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
-        List<Login> logins = null;
+        List<Especie> enderecos = null;
 
         try {
-            logins = em.createQuery("from Login l").getResultList();
+            enderecos = em.createQuery("from Especie e").getResultList();
         } catch (Exception e) {
             System.err.println(e);
         } finally {
             em.close();
         }
 
-        return logins;
+        return enderecos;
     }
 
-    public Login remove(String user) {
+    @Override
+    public Especie remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-        Login login = null;
+        Especie especie = null;
 
         try {
-            login = em.find(Login.class, user);
+            especie = em.find(Especie.class, codigo);
             em.getTransaction().begin();
-            em.remove(login);
+            em.remove(especie);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e);
@@ -84,6 +88,6 @@ public class LoginDAO {
         } finally {
             em.close();
         }
-        return login;
+        return especie;
     }
 }

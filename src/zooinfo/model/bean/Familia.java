@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,39 +21,53 @@ public class Familia implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigoFamilia;
+    private Integer codigo;
     
     private String nomeFamilia;
     private String descricaoFamilia;
-
-    public Familia(int codigoFamilia, String nome, String descricao) {
-        this.codigoFamilia = codigoFamilia;
-        this.nomeFamilia = nome;
-        this.descricaoFamilia = descricao;
-    }
     
-    public int getCodigo() {
-        return codigoFamilia;
+    @ManyToOne
+    private Especie especie;
+
+    public Familia() {
     }
 
-    public void setCodigo(int codigo) {
-        this.codigoFamilia = codigo;
+    public Familia(Integer codigo, String nomeFamilia, String descricaoFamilia, Especie especie) {
+        this.codigo = codigo;
+        this.nomeFamilia = nomeFamilia;
+        this.descricaoFamilia = descricaoFamilia;
+        this.especie = especie;
     }
 
-    public String getNome() {
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNomeFamilia() {
         return nomeFamilia;
     }
 
-    public void setNome(String nome) {
-        this.nomeFamilia = nome;
+    public void setNomeFamilia(String nomeFamilia) {
+        this.nomeFamilia = nomeFamilia;
     }
 
-    public String getDescricao() {
+    public String getDescricaoFamilia() {
         return descricaoFamilia;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricaoFamilia = descricao;
+    public void setDescricaoFamilia(String descricaoFamilia) {
+        this.descricaoFamilia = descricaoFamilia;
     }
 
+    public Especie getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(Especie especie) {
+        this.especie = especie;
+    }
 }
