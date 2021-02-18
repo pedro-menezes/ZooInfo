@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="704.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="zooinfo.controller.CadastrarVendaController">
+    <stylesheets>
+        <URL value="@cadastrarvenda.css" />
+    </stylesheets>
+   <children>
+      <TextField fx:id="textNome" layoutX="115.0" layoutY="89.0" prefHeight="34.0" prefWidth="523.0" styleClass="campos_entrada" />
+      <Label layoutX="36.0" layoutY="98.0" text="Nome" />
+      <Text layoutX="35.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastrar Venda">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Label layoutX="21.0" layoutY="145.0" text="Funcionario" />
+      <DatePicker fx:id="datePicker" layoutX="115.0" layoutY="184.0" prefHeight="34.0" prefWidth="201.0" styleClass="campos_entrada" />
+      <Label layoutX="21.0" layoutY="193.0" text="Data da venda" />
+      <ComboBox layoutX="115.0" layoutY="137.0" prefHeight="34.0" prefWidth="523.0" styleClass="campos_entrada" />
+      <Button layoutX="422.0" layoutY="259.0" mnemonicParsing="false" onAction="#acaoCadastrarAnimal" prefHeight="29.0" prefWidth="253.0" styleClass="botoes" text="Cadastrar" />
+      <Button fx:id="buttonCancelar" layoutX="30.0" layoutY="259.0" mnemonicParsing="false" onAction="#acaoFechar" prefHeight="29.0" prefWidth="253.0" styleClass="botoes" text="Cancelar" />
+   </children>
+</AnchorPane>
