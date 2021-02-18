@@ -28,15 +28,19 @@ public class Animal implements Serializable {
 
     @ManyToOne
     private Alimentacao alimentacao;
+    
+    @ManyToOne
+    private Especie especie;
 
     public Animal() {
     }
 
-    public Animal(Integer codigo, String nomeAnimal, Date dataNascimento, Alimentacao alimentacao) {
+    public Animal(Integer codigo, String nomeAnimal, Date dataNascimento, Alimentacao alimentacao, Especie especie) {
         this.codigo = codigo;
         this.nomeAnimal = nomeAnimal;
         this.dataNascimento = dataNascimento;
         this.alimentacao = alimentacao;
+        this.especie = especie;
     }
 
     public Integer getCodigo() {
@@ -70,4 +74,13 @@ public class Animal implements Serializable {
     public void setAlimentacao(Alimentacao alimentacao) {
         this.alimentacao = alimentacao;
     }
+
+    public Especie getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(Especie especie) {
+        this.especie = especie;
+    }
+    
 }

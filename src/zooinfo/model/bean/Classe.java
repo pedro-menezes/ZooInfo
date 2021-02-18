@@ -25,18 +25,14 @@ public class Classe implements Serializable{
     
     private String nomeClasse;
     private String descricaoClasse;
-    
-    @ManyToOne
-    private Familia familia;
 
     public Classe() {
     }
 
-    public Classe(Integer codigoClasse, String nomeClasse, String descricaoClasse, Familia familia) {
+    public Classe(Integer codigoClasse, String nomeClasse, String descricaoClasse) {
         this.codigoClasse = codigoClasse;
         this.nomeClasse = nomeClasse;
         this.descricaoClasse = descricaoClasse;
-        this.familia = familia;
     }
 
     public Integer getCodigo() {
@@ -61,13 +57,5 @@ public class Classe implements Serializable{
 
     public void setDescricaoClasse(String descricaoClasse) {
         this.descricaoClasse = descricaoClasse;
-    }
-
-    public Familia getFamilia() {
-        return familia;
-    }
-
-    public void setFamilia(Familia familia) {
-        this.familia = familia;
     }
 }

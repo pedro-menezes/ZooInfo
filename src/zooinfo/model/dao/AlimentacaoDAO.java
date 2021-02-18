@@ -90,4 +90,16 @@ public class AlimentacaoDAO implements CRUD<Alimentacao, Integer>{
         }
         return alimentacao;
     }
+    
+    public Integer find(Alimentacao alimentacao){
+        List<Alimentacao> alimentacoes = findAll();
+        
+        for (Alimentacao alimentacaoAux : alimentacoes) {
+            if (alimentacao.getDescricao().equals(alimentacaoAux.getDescricao()) && alimentacao.getQuantidade() == alimentacaoAux.getQuantidade()) {
+                return alimentacaoAux.getCodigo();
+            }
+        }
+        
+        return null;
+    }
 }

@@ -27,16 +27,16 @@ public class Especie implements Serializable{
     private String descricaoEspecie;
 
     @ManyToOne
-    private Animal animal;
-
+    private Familia familia;
+   
     public Especie() {
     }
 
-    public Especie(Integer codigoEspecie, String nomeEspecie, String descricaoEspecie, Animal animal) {
+    public Especie(Integer codigoEspecie, String nomeEspecie, String descricaoEspecie, Familia familia) {
         this.codigo = codigoEspecie;
         this.nomeEspecie = nomeEspecie;
         this.descricaoEspecie = descricaoEspecie;
-        this.animal = animal;
+        this.familia = familia;
     }
 
     public Integer getCodigo() {
@@ -63,11 +63,16 @@ public class Especie implements Serializable{
         this.descricaoEspecie = descricaoEspecie;
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public Familia getFamilia() {
+        return familia;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
+    }
+
+    @Override
+    public String toString() {
+        return getNomeEspecie();
     }
 }

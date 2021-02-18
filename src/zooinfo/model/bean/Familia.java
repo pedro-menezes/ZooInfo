@@ -27,16 +27,16 @@ public class Familia implements Serializable{
     private String descricaoFamilia;
     
     @ManyToOne
-    private Especie especie;
+    private Classe classe;
 
     public Familia() {
     }
 
-    public Familia(Integer codigo, String nomeFamilia, String descricaoFamilia, Especie especie) {
+    public Familia(Integer codigo, String nomeFamilia, String descricaoFamilia, Classe classe) {
         this.codigo = codigo;
         this.nomeFamilia = nomeFamilia;
         this.descricaoFamilia = descricaoFamilia;
-        this.especie = especie;
+        this.classe = classe;
     }
 
     public Integer getCodigo() {
@@ -63,11 +63,11 @@ public class Familia implements Serializable{
         this.descricaoFamilia = descricaoFamilia;
     }
 
-    public Especie getEspecie() {
-        return especie;
+    public Classe getClasse() {
+        return classe;
     }
 
-    public void setEspecie(Especie especie) {
-        this.especie = especie;
+    public void setClasse(Classe classe) {
+        this.classe = classe;
     }
 }

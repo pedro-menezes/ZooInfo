@@ -14,7 +14,7 @@ import zooinfo.model.bean.Animal;
  *
  * @author pedro-menezes
  */
-public class AnimalDAO implements CRUD<Animal, Integer>{
+public class AnimalDAO implements CRUD<Animal, Integer> {
 
     @Override
     public Animal save(Animal animal) {
@@ -56,7 +56,7 @@ public class AnimalDAO implements CRUD<Animal, Integer>{
 
         return animal;
     }
-    
+
     @Override
     public List<Animal> findAll() {
 
@@ -76,7 +76,7 @@ public class AnimalDAO implements CRUD<Animal, Integer>{
 
     @Override
     public Animal remove(Integer codigo) {
-        
+
         EntityManager em = new ConnectionFactory().getConnection();
         Animal animal = null;
 
