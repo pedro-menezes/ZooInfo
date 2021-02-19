@@ -25,11 +25,6 @@ public class Gerente extends Funcionario implements Serializable{
         this.bonusSalarial = bonusSalarial;
     }
 
-    public Gerente(float bonusSalarial, String cpf, String nome, Date dataNascimento, Date dataAdmissao, double salario, char sexo, Login login, Endereco endereco, Venda vendas) {
-        super(cpf, nome, dataNascimento, dataAdmissao, salario, sexo, login, endereco, vendas);
-        this.bonusSalarial = bonusSalarial;
-    }
-
     public float getBonusSalarial() {
         return bonusSalarial;
     }

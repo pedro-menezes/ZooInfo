@@ -86,4 +86,16 @@ public class LoginDAO {
         }
         return login;
     }
+    
+     public boolean exist(Login login) {
+        List<Login> logins = findAll();
+
+        for (Login loginAux : logins) {
+            if (login.getUser().equals(loginAux.getUser())){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

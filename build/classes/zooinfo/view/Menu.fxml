@@ -17,9 +17,19 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Vendas">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="itemCadastrarVenda" mnemonicParsing="false" onAction="#acaoCadastrarVenda" text="Cadastrar Vendas" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Funcionario">
+              <items>
+                <MenuItem fx:id="itemCadastrarFuncionario" mnemonicParsing="false" onAction="#acaoCadastrarFuncionario" text="Cadastrar Funcionarios" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Departamento">
+              <items>
+                <MenuItem fx:id="itemCadastrarDepartamento" mnemonicParsing="false" onAction="#acaoCadastrarDepartamento" text="Cadastrar Departamento" />
+              </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Config" />
         </menus>
       </MenuBar>

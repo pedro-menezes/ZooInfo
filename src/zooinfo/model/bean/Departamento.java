@@ -26,8 +26,6 @@ public class Departamento implements Serializable{
     
     private String nomeDepto;
     
-    @ManyToOne
-    private Funcionario funcionarios;
 
     public Departamento() {
     }
@@ -35,7 +33,6 @@ public class Departamento implements Serializable{
     public Departamento(Integer codigoDepto, String nomeDepto, Funcionario funcionarios) {
         this.codigo = codigoDepto;
         this.nomeDepto = nomeDepto;
-        this.funcionarios = funcionarios;
     }
 
     public Integer getCodigo() {
@@ -54,11 +51,8 @@ public class Departamento implements Serializable{
         this.nomeDepto = nomeDepto;
     }
 
-    public Funcionario getFuncionarios() {
-        return funcionarios;
-    }
-
-    public void setFuncionarios(Funcionario funcionarios) {
-        this.funcionarios = funcionarios;
+    @Override
+    public String toString() {
+        return getNomeDepto();
     }
 }

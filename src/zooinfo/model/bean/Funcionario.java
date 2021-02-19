@@ -35,21 +35,10 @@ public class Funcionario implements Serializable{
     private Endereco endereco;
     
     @ManyToOne
-    private Venda vendas;
+    private Departamento departamento;
+    
 
     public Funcionario() {
-    }
-
-    public Funcionario(String cpf, String nome, Date dataNascimento, Date dataAdmissao, double salario, char sexo, Login login, Endereco endereco, Venda vendas) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.dataAdmissao = dataAdmissao;
-        this.salario = salario;
-        this.sexo = sexo;
-        this.login = login;
-        this.endereco = endereco;
-        this.vendas = vendas;
     }
 
     public String getCpf() {
@@ -116,11 +105,16 @@ public class Funcionario implements Serializable{
         this.endereco = endereco;
     }
 
-    public Venda getVendas() {
-        return vendas;
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
-    public void setVendas(Venda vendas) {
-        this.vendas = vendas;
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    @Override
+    public String toString() {
+        return getNome() + ", "+getCpf();
     }
 }

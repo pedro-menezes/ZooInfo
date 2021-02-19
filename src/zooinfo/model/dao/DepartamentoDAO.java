@@ -90,4 +90,16 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer>{
         }
         return departamento;
     }
+    
+      public boolean exist(Departamento departamento) {
+        List<Departamento> depatamentos = findAll();
+
+        for (Departamento departamentoAux : depatamentos) {
+            if (departamento.getNomeDepto().equals(departamentoAux.getNomeDepto())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

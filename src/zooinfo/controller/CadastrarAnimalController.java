@@ -55,6 +55,14 @@ public class CadastrarAnimalController implements Initializable {
 
     private ObservableList<Especie> obsList;
 
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        preencherCombo();
+    }
+
     @FXML
     private void acaoCadastrarAnimal(ActionEvent evt) {
         Animal animal = new Animal();
@@ -67,25 +75,22 @@ public class CadastrarAnimalController implements Initializable {
         alimentacao.setQuantidade(Float.parseFloat(textQuantidade.getText()));
         AlimentacaoDAO alimentacaoDAO = new AlimentacaoDAO();
         alimentacaoDAO.save(alimentacao);
+        int alimentacaoId = alimentacaoDAO.find(alimentacao);
+        alimentacao.setCodigo(alimentacaoId);
+
         animal.setAlimentacao(alimentacao);
 
         System.out.println(animal);
         AnimalDAO animalDAO = new AnimalDAO();
         animalDAO.save(animal);
+
+        acaoFechar(new ActionEvent());
     }
 
     @FXML
     private void acaoFechar(ActionEvent evt) {
         Stage stage = (Stage) buttonCancelar.getScene().getWindow();
         stage.close();
-    }
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        preencherCombo();
     }
 
     private void preencherCombo() {
@@ -102,5 +107,4 @@ public class CadastrarAnimalController implements Initializable {
         Date date = Date.from(instant);
         return date;
     }
-
 }

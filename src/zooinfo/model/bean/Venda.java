@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -22,14 +23,11 @@ public class Venda implements Serializable{
     
     private Date dataVenda;
     private boolean usado;
+    
+    @ManyToOne
+    private Funcionario funcionario;
 
     public Venda() {
-    }
-
-    public Venda(Integer codigo, Date dataVenda, boolean usado) {
-        this.codigo = codigo;
-        this.dataVenda = dataVenda;
-        this.usado = usado;
     }
 
     public Integer getCodigo() {
@@ -54,5 +52,13 @@ public class Venda implements Serializable{
 
     public void setUsado(boolean usado) {
         this.usado = usado;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 }

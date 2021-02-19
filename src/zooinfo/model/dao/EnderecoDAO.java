@@ -14,10 +14,10 @@ import zooinfo.model.bean.Endereco;
  *
  * @author pedro-menezes
  */
-public class EnderecoDAO implements CRUD<Endereco, Integer>{
+public class EnderecoDAO implements CRUD<Endereco, Integer> {
 
-   @Override
-   public Endereco save(Endereco endereco) {
+    @Override
+    public Endereco save(Endereco endereco) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
@@ -39,7 +39,7 @@ public class EnderecoDAO implements CRUD<Endereco, Integer>{
         return endereco;
     }
 
-   @Override
+    @Override
     public Endereco findById(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
         Endereco endereco = null;
@@ -54,7 +54,7 @@ public class EnderecoDAO implements CRUD<Endereco, Integer>{
         return endereco;
     }
 
-   @Override
+    @Override
     public List<Endereco> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -71,7 +71,7 @@ public class EnderecoDAO implements CRUD<Endereco, Integer>{
         return enderecos;
     }
 
-   @Override
+    @Override
     public Endereco remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -89,5 +89,21 @@ public class EnderecoDAO implements CRUD<Endereco, Integer>{
             em.close();
         }
         return endereco;
+    }
+
+    public Integer find(Endereco endereco) {
+        List<Endereco> enderecos = findAll();
+
+        for (Endereco enderecoAux : enderecos) {
+            if (endereco.getLogradouro().equals(enderecoAux.getLogradouro())
+                    && endereco.getBairro().equals(enderecoAux.getBairro())
+                    && endereco.getCidade().equals(enderecoAux.getCidade())
+                    && endereco.getEstado().equals(enderecoAux.getEstado())
+                    && endereco.getNumero() == enderecoAux.getNumero()) {
+                return enderecoAux.getCodigo();
+            }
+        }
+
+        return null;
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="768.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.EditarAnimalController">
+    <stylesheets>
+        <URL value="@editaranimal.css" />
+    </stylesheets>
+   <children>
+      <Text layoutX="21.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Animal">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Text layoutX="21.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Procurar Animal" />
+      <Text layoutX="14.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome " />
+      <Text layoutX="14.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alimentação" />
+      <Text layoutX="15.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Especie" />
+      <TextField fx:id="textNome" layoutX="73.0" layoutY="149.0" prefHeight="34.0" prefWidth="290.0" />
+      <Text layoutX="371.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data de Nascimento" />
+      <Text layoutX="402.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade" />
+      <TextField fx:id="textAlimentacao" layoutX="113.0" layoutY="202.0" prefHeight="34.0" prefWidth="276.0" />
+      <ComboBox fx:id="comboEspecie" layoutX="73.0" layoutY="260.0" prefHeight="34.0" prefWidth="673.0" />
+      <DatePicker fx:id="dateNascimento" layoutX="512.0" layoutY="149.0" prefHeight="34.0" prefWidth="233.0" />
+      <Button fx:id="buttonCancelar" layoutX="15.0" layoutY="329.0" mnemonicParsing="false" onAction="#acaoCancelar" prefHeight="34.0" prefWidth="264.0" text="Cancelar" />
+      <Button fx:id="buttonSalvar" layoutX="481.0" layoutY="329.0" mnemonicParsing="false" onAction="#acaoSalvar" prefHeight="34.0" prefWidth="264.0" text="Salvar" />
+      <TextField fx:id="textQuantidade" layoutX="495.0" layoutY="202.0" prefHeight="34.0" prefWidth="251.0" />
+      <TextField fx:id="textCodigo" layoutX="133.0" layoutY="85.0" prefHeight="34.0" prefWidth="513.0" promptText="Código" />
+      <Button fx:id="buttonPesquisar" layoutX="657.0" layoutY="84.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" text="Pesquisar" />
+   </children>
+</AnchorPane>

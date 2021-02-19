@@ -14,28 +14,29 @@ import zooinfo.model.bean.Alimentacao;
  *
  * @author pedro-menezes
  */
-public class AlimentacaoDAO implements CRUD<Alimentacao, Integer>{
+public class AlimentacaoDAO implements CRUD<Alimentacao, Integer> {
 
     @Override
     public Alimentacao save(Alimentacao alimentacao) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
-        try {
-            em.getTransaction().begin();
-            if (alimentacao.getCodigo() == null) {
-                em.merge(alimentacao);
-            } else {
-                em.persist(alimentacao);
+        if (find(alimentacao) == null) {
+            try {
+                em.getTransaction().begin();
+                if (alimentacao.getCodigo() == null) {
+                    em.merge(alimentacao);
+                } else {
+                    em.persist(alimentacao);
+                }
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+                System.err.println(e);
+            } finally {
+                em.close();
             }
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            System.err.println(e);
-        } finally {
-            em.close();
         }
-
         return alimentacao;
     }
 
@@ -90,16 +91,16 @@ public class AlimentacaoDAO implements CRUD<Alimentacao, Integer>{
         }
         return alimentacao;
     }
-    
-    public Integer find(Alimentacao alimentacao){
+
+    public Integer find(Alimentacao alimentacao) {
         List<Alimentacao> alimentacoes = findAll();
-        
+
         for (Alimentacao alimentacaoAux : alimentacoes) {
             if (alimentacao.getDescricao().equals(alimentacaoAux.getDescricao()) && alimentacao.getQuantidade() == alimentacaoAux.getQuantidade()) {
                 return alimentacaoAux.getCodigo();
             }
         }
-        
+
         return null;
     }
 }

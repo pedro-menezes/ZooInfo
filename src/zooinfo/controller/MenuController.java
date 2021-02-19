@@ -28,9 +28,48 @@ public class MenuController implements Initializable {
     private MenuItem itemCadastrarAnimal;
 
     @FXML
+    private MenuItem itemCadastrarFuncionario;
+
+    @FXML
+    private MenuItem itemCadastrarVenda;
+
+    @FXML
     private void acaoCadastarAnimal(ActionEvent evt) throws IOException {
         Stage stage = new Stage();
         URL url = getClass().getResource("/zooinfo/view/CadastrarAnimal.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoCadastrarFuncionario(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/CadastroFuncionario.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoCadastrarVenda(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/CadastrarVendas.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoCadastrarDepartamento(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/CadastrarDepartamento.fxml");
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
 
@@ -43,7 +82,6 @@ public class MenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
 
+    }
 }
