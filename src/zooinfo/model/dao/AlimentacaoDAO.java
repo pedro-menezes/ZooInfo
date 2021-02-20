@@ -103,4 +103,16 @@ public class AlimentacaoDAO implements CRUD<Alimentacao, Integer> {
 
         return null;
     }
+    
+    public boolean exist(Alimentacao alimentacao) {
+        List<Alimentacao> alimentacoes = findAll();
+
+        for (Alimentacao alimentacaoAux : alimentacoes) {
+            if (alimentacao.getDescricao().equals(alimentacaoAux.getDescricao()) && alimentacao.getQuantidade() == alimentacaoAux.getQuantidade()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

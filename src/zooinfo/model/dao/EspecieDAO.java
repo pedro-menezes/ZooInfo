@@ -38,6 +38,27 @@ public class EspecieDAO implements CRUD<Especie, Integer> {
 
         return especie;
     }
+    
+    public Especie alter(Especie especie, int codigo) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Especie especieAux = em.find(Especie.class, codigo);
+            especieAux.setCodigo(especie.getCodigo());
+            especieAux.setNomeEspecie(especie.getNomeEspecie());
+            especieAux.setDescricaoEspecie(especie.getDescricaoEspecie());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return especie;
+    }
 
     @Override
     public Especie findById(Integer codigo) {
@@ -45,7 +66,7 @@ public class EspecieDAO implements CRUD<Especie, Integer> {
         Especie especie = null;
 
         try {
-            especie = em.find(Especie.class, especie);
+            especie = em.find(Especie.class, codigo);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
@@ -89,5 +110,16 @@ public class EspecieDAO implements CRUD<Especie, Integer> {
             em.close();
         }
         return especie;
+    }
+
+    public boolean exist(Especie especie) {
+        List<Especie> especies = findAll();
+
+        for (Especie especieAux : especies) {
+            if (especie.getNomeEspecie().equals(especieAux.getNomeEspecie())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

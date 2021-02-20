@@ -6,25 +6,37 @@
 package zooinfo.model.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author mathe
  */
 @Entity
-public class Classe implements Serializable{
-    
+@Table(name = "classe")
+public class Classe implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigoClasse;
-    
+
+    @Column
     private String nomeClasse;
+
+    @Column
     private String descricaoClasse;
+
+    @OneToMany(mappedBy = "classe")
+    private List<Familia> familias = new ArrayList();
 
     public Classe() {
     }
@@ -57,5 +69,10 @@ public class Classe implements Serializable{
 
     public void setDescricaoClasse(String descricaoClasse) {
         this.descricaoClasse = descricaoClasse;
+    }
+
+    @Override
+    public String toString() {
+        return getNomeClasse();
     }
 }

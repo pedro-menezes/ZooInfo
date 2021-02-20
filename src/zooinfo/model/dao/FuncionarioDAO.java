@@ -38,6 +38,32 @@ public class FuncionarioDAO implements CRUD<Funcionario, String>{
 
         return funcionario;
     }
+   
+    public Funcionario alter(Funcionario funcionario, int codigo) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Funcionario especieAux = em.find(Funcionario.class, codigo);
+            especieAux.setCpf(funcionario.getCpf());
+            especieAux.setNome(funcionario.getNome());
+            especieAux.setDataNascimento(funcionario.getDataNascimento());
+            especieAux.setDataAdmissao(funcionario.getDataAdmissao());
+            especieAux.setDepartamento(funcionario.getDepartamento());
+            especieAux.setLogin(funcionario.getLogin());
+            especieAux.setSalario(funcionario.getSexo());
+            especieAux.setSexo(funcionario.getSexo());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return funcionario;
+    }
 
    @Override
     public Funcionario findById(String cpf) {
@@ -45,7 +71,7 @@ public class FuncionarioDAO implements CRUD<Funcionario, String>{
         Funcionario funcionario = null;
 
         try {
-            funcionario = em.find(Funcionario.class, funcionario);
+            funcionario = em.find(Funcionario.class, cpf);
         } catch (Exception e) {
             System.err.println(e);
         } finally {

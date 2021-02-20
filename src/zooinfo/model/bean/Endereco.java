@@ -6,27 +6,41 @@
 package zooinfo.model.bean;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author mathe
  */
 @Entity
+@Table(name = "endereco")
 public class Endereco implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
+    @Column
     private String logradouro;
+    
+    @Column
     private int numero;
+    
+    @Column
     private String bairro;
+    
+    @Column
     private String cidade;
+    
+    @Column
     private String cep;
+    
+    @Column
     private String estado;
 
     public Endereco() {

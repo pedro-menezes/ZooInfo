@@ -14,10 +14,10 @@ import zooinfo.model.bean.Departamento;
  *
  * @author pedro-menezes
  */
-public class DepartamentoDAO implements CRUD<Departamento, Integer>{
+public class DepartamentoDAO implements CRUD<Departamento, Integer> {
 
-   @Override
-   public Departamento save(Departamento departamento) {
+    @Override
+    public Departamento save(Departamento departamento) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
@@ -39,7 +39,27 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer>{
         return departamento;
     }
 
-   @Override
+    public Departamento alter(Departamento departamento, int codigo) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Departamento departamentoAux = em.find(Departamento.class, codigo);
+            departamentoAux.setCodigo(departamento.getCodigo());
+            departamentoAux.setNomeDepto(departamento.getNomeDepto());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return departamento;
+    }
+
+    @Override
     public Departamento findById(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
         Departamento departamento = null;
@@ -54,7 +74,7 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer>{
         return departamento;
     }
 
-   @Override
+    @Override
     public List<Departamento> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -71,7 +91,7 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer>{
         return departamento;
     }
 
-   @Override
+    @Override
     public Departamento remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -90,8 +110,8 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer>{
         }
         return departamento;
     }
-    
-      public boolean exist(Departamento departamento) {
+
+    public boolean exist(Departamento departamento) {
         List<Departamento> depatamentos = findAll();
 
         for (Departamento departamentoAux : depatamentos) {

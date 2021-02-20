@@ -39,6 +39,29 @@ public class AnimalDAO implements CRUD<Animal, Integer> {
 
         return animal;
     }
+    
+    public Animal alter(Animal animal, int codigo) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Animal animalAux = em.find(Animal.class, codigo);
+            animalAux.setCodigo(animal.getCodigo());
+            animalAux.setNomeAnimal(animal.getNomeAnimal());
+            animalAux.setAlimentacao(animal.getAlimentacao());
+            animalAux.setDataNascimento(animal.getDataNascimento());
+            animalAux.setEspecie(animal.getEspecie());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return animal;
+    }
 
     @Override
     public Animal findById(Integer codigo) {

@@ -14,10 +14,10 @@ import zooinfo.model.bean.Familia;
  *
  * @author pedro-menezes
  */
-public class FamiliaDAO implements CRUD<Familia, Integer>{
+public class FamiliaDAO implements CRUD<Familia, Integer> {
 
-   @Override
-   public Familia save(Familia familia) {
+    @Override
+    public Familia save(Familia familia) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
@@ -38,14 +38,35 @@ public class FamiliaDAO implements CRUD<Familia, Integer>{
 
         return familia;
     }
+    
+    public Familia alter(Familia familia, int codigo) {
 
-   @Override
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Familia familiaAux = em.find(Familia.class, codigo);
+            familiaAux.setCodigo(familia.getCodigo());
+            familiaAux.setNomeFamilia(familia.getNomeFamilia());
+            familiaAux.setDescricaoFamilia(familia.getDescricaoFamilia());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return familia;
+    }
+
+    @Override
     public Familia findById(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
         Familia familia = null;
 
         try {
-            familia = em.find(Familia.class, familia);
+            familia = em.find(Familia.class, codigo);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
@@ -54,7 +75,7 @@ public class FamiliaDAO implements CRUD<Familia, Integer>{
         return familia;
     }
 
-   @Override
+    @Override
     public List<Familia> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -71,7 +92,7 @@ public class FamiliaDAO implements CRUD<Familia, Integer>{
         return familias;
     }
 
-   @Override
+    @Override
     public Familia remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -89,5 +110,16 @@ public class FamiliaDAO implements CRUD<Familia, Integer>{
             em.close();
         }
         return familia;
+    }
+    
+     public boolean exist(Familia familia) {
+        List<Familia> familias = findAll();
+
+        for (Familia familiaAux : familias) {
+            if (familia.getNomeFamilia().equals(familiaAux.getNomeFamilia())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

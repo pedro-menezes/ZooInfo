@@ -25,15 +25,6 @@ import javafx.stage.Stage;
 public class MenuController implements Initializable {
 
     @FXML
-    private MenuItem itemCadastrarAnimal;
-
-    @FXML
-    private MenuItem itemCadastrarFuncionario;
-
-    @FXML
-    private MenuItem itemCadastrarVenda;
-
-    @FXML
     private void acaoCadastarAnimal(ActionEvent evt) throws IOException {
         Stage stage = new Stage();
         URL url = getClass().getResource("/zooinfo/view/CadastrarAnimal.fxml");
@@ -70,6 +61,94 @@ public class MenuController implements Initializable {
     void acaoCadastrarDepartamento(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         URL url = getClass().getResource("/zooinfo/view/CadastrarDepartamento.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoEditarAnimal(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/EditarAnimal.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoEditarVenda(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/EditarVendas.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoCadastrarEspecie(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/CadastrarEspecie.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoEditarEspecie(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/EditarEspecie.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoCadastrarFamilia(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/CadastrarFamilia.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoEditarFamilia(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/EditarFamilia.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoCadastrarClasse(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/CadastrarClasse.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoEditarClasse(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/EditarClasse.fxml");
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
 

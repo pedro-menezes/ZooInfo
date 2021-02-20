@@ -6,18 +6,22 @@
 package zooinfo.model.bean;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author mathe
  */
 @Entity
+@Table(name = "login")
 public class Login implements Serializable{
     @Id
     private String user;
-    
+  
+    @Column
     private String senha;
 
     public Login() {

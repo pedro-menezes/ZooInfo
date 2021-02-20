@@ -38,6 +38,6 @@
       <Button fx:id="buttonSalvar" layoutX="481.0" layoutY="329.0" mnemonicParsing="false" onAction="#acaoSalvar" prefHeight="34.0" prefWidth="264.0" text="Salvar" />
       <TextField fx:id="textQuantidade" layoutX="495.0" layoutY="202.0" prefHeight="34.0" prefWidth="251.0" />
       <TextField fx:id="textCodigo" layoutX="133.0" layoutY="85.0" prefHeight="34.0" prefWidth="513.0" promptText="Código" />
-      <Button fx:id="buttonPesquisar" layoutX="657.0" layoutY="84.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" text="Pesquisar" />
+      <Button fx:id="buttonPesquisar" layoutX="657.0" layoutY="84.0" mnemonicParsing="false" onAction="#acaoPesquisar" prefHeight="34.0" prefWidth="88.0" text="Pesquisar" />
    </children>
 </AnchorPane>

@@ -6,37 +6,56 @@
 package zooinfo.model.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author mathe
  */
 @Entity
-public class Funcionario implements Serializable{
-    
+@Table(name = "funcionario")
+public class Funcionario implements Serializable {
+
     @Id
     private String cpf;
-    
+
+    @Column
     private String nome;
+
+    @Column
     private Date dataNascimento;
+
+    @Column
     private Date dataAdmissao;
+
+    @Column
     private double salario;
+
+    @Column
     private char sexo;
-    
+
     @OneToOne
     private Login login;
 
     @OneToOne
     private Endereco endereco;
-    
+
     @ManyToOne
+    @JoinColumn(name = "depCodigo")
     private Departamento departamento;
-    
+
+    @OneToMany(mappedBy = "funcionario")
+    private List<Venda> vendas = new ArrayList();
 
     public Funcionario() {
     }
@@ -115,6 +134,6 @@ public class Funcionario implements Serializable{
 
     @Override
     public String toString() {
-        return getNome() + ", "+getCpf();
+        return getNome() + ", " + getCpf();
     }
 }

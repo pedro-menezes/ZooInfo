@@ -38,6 +38,27 @@ public class ClasseDAO implements CRUD<Classe, Integer>{
 
         return classe;
     }
+   
+   public Classe alter(Classe classe, int codigo) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Classe classeAux = em.find(Classe.class, codigo);
+            classeAux.setCodigo(classe.getCodigo());
+            classeAux.setNomeClasse(classe.getNomeClasse());
+            classeAux.setDescricaoClasse(classe.getDescricaoClasse());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return classe;
+    }
 
    @Override
     public Classe findById(Integer codigo) {
@@ -45,7 +66,7 @@ public class ClasseDAO implements CRUD<Classe, Integer>{
         Classe classe = null;
 
         try {
-            classe = em.find(Classe.class, classe);
+            classe = em.find(Classe.class, codigo);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
@@ -89,5 +110,16 @@ public class ClasseDAO implements CRUD<Classe, Integer>{
             em.close();
         }
         return classe;
+    }
+    
+     public boolean exist(Classe classe) {
+        List<Classe> classes = findAll();
+
+        for (Classe classeAux : classes) {
+            if (classe.getNomeClasse().equals(classeAux.getNomeClasse())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

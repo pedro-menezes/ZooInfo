@@ -7,24 +7,31 @@ package zooinfo.model.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Venda implements Serializable{
-    
+@Table(name = "venda")
+public class Venda implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
-    
+
+    @Column
     private Date dataVenda;
+
+    @Column
     private boolean usado;
-    
+
     @ManyToOne
+    @JoinColumn(name = "funCpf")
     private Funcionario funcionario;
 
     public Venda() {

@@ -13,11 +13,34 @@
           <Menu mnemonicParsing="false" text="Animais">
             <items>
               <MenuItem fx:id="itemCadastrarAnimal" mnemonicParsing="false" onAction="#acaoCadastarAnimal" text="Cadastrar Animais" />
+                  <MenuItem fx:id="itemEditarAnimal" mnemonicParsing="false" onAction="#acaoEditarAnimal" text="Editar Animais" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <Menu fx:id="itemCadastrarEspecie" mnemonicParsing="false" text="Especie">
+                    <items>
+                      <MenuItem fx:id="itemCadastrarEspecie" mnemonicParsing="false" onAction="#acaoCadastrarEspecie" text="Cadastrar Especie" />
+                        <MenuItem fx:id="itemEditarEspecie" mnemonicParsing="false" onAction="#acaoEditarEspecie" text="Editar Especie" />
+                    </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <Menu mnemonicParsing="false" text="Familia">
+                    <items>
+                      <MenuItem fx:id="itemCadastrarFamilia" mnemonicParsing="false" onAction="#acaoCadastrarFamilia" text="Cadastrar Familia" />
+                        <MenuItem fx:id="itemEditarFamilia" mnemonicParsing="false" onAction="#acaoEditarFamilia" text="Editar Familia" />
+                    </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <Menu mnemonicParsing="false" text="Classe">
+                    <items>
+                      <MenuItem fx:id="itemCadastrarClasse" mnemonicParsing="false" onAction="#acaoCadastrarClasse" text="Cadastrar Classe" />
+                        <MenuItem fx:id="itemEditarClasse" mnemonicParsing="false" onAction="#acaoEditarClasse" text="Editar Classe" />
+                    </items>
+                  </Menu>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Vendas">
             <items>
               <MenuItem fx:id="itemCadastrarVenda" mnemonicParsing="false" onAction="#acaoCadastrarVenda" text="Cadastrar Vendas" />
+                  <MenuItem fx:id="itemEditarVenda" mnemonicParsing="false" onAction="#acaoEditarVenda" text="Editar Vendas" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Funcionario">

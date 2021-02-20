@@ -7,29 +7,38 @@ package zooinfo.model.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "animal")
 public class Animal implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
+    @Column
     private String nomeAnimal;
+    
+    @Column
     private Date dataNascimento;
 
     @ManyToOne
+    @JoinColumn(name = "aliCodigo")
     private Alimentacao alimentacao;
     
     @ManyToOne
+    @JoinColumn(name = "espCodigo")
     private Especie especie;
 
     public Animal() {
