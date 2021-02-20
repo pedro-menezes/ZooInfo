@@ -87,11 +87,8 @@ public class EditarAnimalController implements Initializable {
         animal.setEspecie(comboEspecie.getValue());
         animal.setDataNascimento(getDate());
         
-        System.out.println("_____ID Ali_____ "+animal.getAlimentacao().getCodigo());
-        System.out.println("_____ID Esp_____ "+animal.getEspecie().getCodigo());
-        System.out.println("_____ID Ani_____ "+animal.getCodigo());
-        
         animalDAO.alter(animal, animal.getCodigo());
+        acaoCancelar(event);
     }
 
     @FXML

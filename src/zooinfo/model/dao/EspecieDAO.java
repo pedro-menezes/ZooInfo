@@ -49,6 +49,7 @@ public class EspecieDAO implements CRUD<Especie, Integer> {
             especieAux.setCodigo(especie.getCodigo());
             especieAux.setNomeEspecie(especie.getNomeEspecie());
             especieAux.setDescricaoEspecie(especie.getDescricaoEspecie());
+            especieAux.setFamilia(especie.getFamilia());
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e);

@@ -78,15 +78,12 @@ public class EditarEspecieController implements Initializable {
         EspecieDAO especieDAO = new EspecieDAO();
 
         especieDAO.alter(especie, especie.getCodigo());
+        acaoCancelar(event);
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
         especie = new EspecieDAO().findById(Integer.parseInt(textCodigo.getText()));
-        for (Especie especie1 : new EspecieDAO().findAll()) {
-            System.out.println("___NOME___ " + especie1.getNomeEspecie());
-            System.out.println("____ID_____ " + especie1.getCodigo());
-        }
         
         if (especie != null) {
             textNome.setText(especie.getNomeEspecie());

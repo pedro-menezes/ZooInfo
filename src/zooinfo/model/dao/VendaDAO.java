@@ -14,10 +14,10 @@ import zooinfo.model.bean.Venda;
  *
  * @author pedro-menezes
  */
-public class VendaDAO implements CRUD<Venda, Integer>{
+public class VendaDAO implements CRUD<Venda, Integer> {
 
-   @Override
-   public Venda save(Venda venda) {
+    @Override
+    public Venda save(Venda venda) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
@@ -39,13 +39,32 @@ public class VendaDAO implements CRUD<Venda, Integer>{
         return venda;
     }
 
-   @Override
+    public Venda ingressoUsado(Venda venda, int codigo) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Venda vendaAux = em.find(Venda.class, codigo);
+            vendaAux.setUsado(true);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return venda;
+    }
+
+    @Override
     public Venda findById(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
         Venda venda = null;
 
         try {
-            venda = em.find(Venda.class, venda);
+            venda = em.find(Venda.class, codigo);
         } catch (Exception e) {
             System.err.println(e);
         } finally {
@@ -54,7 +73,7 @@ public class VendaDAO implements CRUD<Venda, Integer>{
         return venda;
     }
 
-   @Override
+    @Override
     public List<Venda> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -71,7 +90,7 @@ public class VendaDAO implements CRUD<Venda, Integer>{
         return vendas;
     }
 
-   @Override
+    @Override
     public Venda remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();

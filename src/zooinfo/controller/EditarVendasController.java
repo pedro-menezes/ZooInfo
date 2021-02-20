@@ -7,7 +7,15 @@ package zooinfo.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import zooinfo.model.bean.Venda;
+import zooinfo.model.dao.VendaDAO;
 
 /**
  * FXML Controller class
@@ -16,12 +24,50 @@ import javafx.fxml.Initializable;
  */
 public class EditarVendasController implements Initializable {
 
+    @FXML
+    private TextField textCodigo;
+
+    @FXML
+    private Button buttonCancelar;
+
+    @FXML
+    private Button buttonSalvar;
+
+    @FXML
+    private TextArea textDados;
+
+    private Venda venda;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    @FXML
+    void acaoCancelar(ActionEvent event) {
+        Stage stage = (Stage) buttonCancelar.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void acaoSalvar(ActionEvent event) {
+        venda.setUsado(true);
+        VendaDAO vendaDAO = new VendaDAO();
+        vendaDAO.ingressoUsado(venda, venda.getCodigo());
+        acaoCancelar(event);
+    }
+
+    @FXML
+    void acaoPesquisar(ActionEvent event) {
+        venda = new VendaDAO().findById(Integer.parseInt(textCodigo.getText()));
+        System.out.println("___ID___ "+venda.getCodigo());
+        if (venda != null) {
+            textDados.setText(venda.getFuncionario().getCpf() + ": " + venda.getFuncionario().getNome() + "\n" + venda.getDataVenda());
+        } else {
+            System.out.println("Não encontrado");
+        }
+    }
 }

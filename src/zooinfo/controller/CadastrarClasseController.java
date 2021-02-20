@@ -56,6 +56,7 @@ public class CadastrarClasseController implements Initializable {
         ClasseDAO classeDAO = new ClasseDAO();
         if (!classeDAO.exist(classe)) {
             classeDAO.save(classe);
+            acaoCancelar(event);
         } else {
             System.out.println("Já existe");
         }

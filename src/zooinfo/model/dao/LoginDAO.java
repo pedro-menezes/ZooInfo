@@ -37,6 +37,26 @@ public class LoginDAO {
 
         return login;
     }
+    
+    public Login alter(Login login, String user) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Login loginAux = em.find(Login.class, user);
+            loginAux.setUser(login.getUser());
+            loginAux.setSenha(login.getSenha());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return login;
+    }
 
     public Login findById(String user) {
         EntityManager em = new ConnectionFactory().getConnection();

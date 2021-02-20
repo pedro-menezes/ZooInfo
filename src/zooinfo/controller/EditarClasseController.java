@@ -67,6 +67,7 @@ public class EditarClasseController implements Initializable {
         ClasseDAO classeDAO = new ClasseDAO();
         
         classeDAO.alter(classe, classe.getCodigo());
+        acaoCancelar(event);
     }
 
     @FXML

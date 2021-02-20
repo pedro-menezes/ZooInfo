@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,10 +18,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "login")
-public class Login implements Serializable{
+public class Login implements Serializable {
+
     @Id
     private String user;
-  
+
     @Column
     private String senha;
 
@@ -47,5 +49,5 @@ public class Login implements Serializable{
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
 }

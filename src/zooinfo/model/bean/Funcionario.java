@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -44,17 +45,17 @@ public class Funcionario implements Serializable {
     @Column
     private char sexo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Login login;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Endereco endereco;
 
     @ManyToOne
     @JoinColumn(name = "depCodigo")
     private Departamento departamento;
 
-    @OneToMany(mappedBy = "funcionario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
     private List<Venda> vendas = new ArrayList();
 
     public Funcionario() {

@@ -38,6 +38,30 @@ public class EnderecoDAO implements CRUD<Endereco, Integer> {
 
         return endereco;
     }
+    
+    public Endereco alter(Endereco endereco, int codigo) {
+
+        EntityManager em = new ConnectionFactory().getConnection();
+
+        try {
+            em.getTransaction().begin();
+            Endereco enderecoAux = em.find(Endereco.class, codigo);
+            enderecoAux.setCep(endereco.getCep());
+            enderecoAux.setLogradouro(endereco.getLogradouro());
+            enderecoAux.setNumero(endereco.getNumero());
+            enderecoAux.setBairro(endereco.getBairro());
+            enderecoAux.setCidade(endereco.getCidade());
+            enderecoAux.setEstado(endereco.getEstado());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println(e);
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+
+        return endereco;
+    }
 
     @Override
     public Endereco findById(Integer codigo) {

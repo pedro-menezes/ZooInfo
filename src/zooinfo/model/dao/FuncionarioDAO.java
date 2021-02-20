@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
 import zooinfo.model.bean.Funcionario;
+import zooinfo.model.bean.Login;
 
 /**
  *
@@ -39,21 +40,21 @@ public class FuncionarioDAO implements CRUD<Funcionario, String>{
         return funcionario;
     }
    
-    public Funcionario alter(Funcionario funcionario, int codigo) {
+    public Funcionario alter(Funcionario funcionario, String codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
         try {
             em.getTransaction().begin();
-            Funcionario especieAux = em.find(Funcionario.class, codigo);
-            especieAux.setCpf(funcionario.getCpf());
-            especieAux.setNome(funcionario.getNome());
-            especieAux.setDataNascimento(funcionario.getDataNascimento());
-            especieAux.setDataAdmissao(funcionario.getDataAdmissao());
-            especieAux.setDepartamento(funcionario.getDepartamento());
-            especieAux.setLogin(funcionario.getLogin());
-            especieAux.setSalario(funcionario.getSexo());
-            especieAux.setSexo(funcionario.getSexo());
+            Funcionario funcionarioAux = em.find(Funcionario.class, codigo);
+            
+            funcionarioAux.setCpf(funcionario.getCpf());
+            funcionarioAux.setNome(funcionario.getNome());
+            funcionarioAux.setDataNascimento(funcionario.getDataNascimento());
+            funcionarioAux.setDataAdmissao(funcionario.getDataAdmissao());
+            funcionarioAux.setDepartamento(funcionario.getDepartamento());
+            funcionarioAux.setSalario(funcionario.getSalario());
+            funcionarioAux.setSexo(funcionario.getSexo());
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e);

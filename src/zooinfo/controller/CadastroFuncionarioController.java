@@ -152,13 +152,10 @@ public class CadastroFuncionarioController implements Initializable {
             funcionario.setLogin(login);
             funcionario.setDepartamento(comboDepartamento.getValue());
 
-            System.out.println("_____ID Dep_____  " + funcionario.getDepartamento().getCodigo());
-            System.out.println("_____ID End_____ " + funcionario.getEndereco().getCodigo());
-            System.out.println("_____ID User_____ " + funcionario.getLogin().getUser());
-
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
             funcionarioDAO.save(funcionario);
         }
+        acaoCancelar(event);
     }
 
     public void addGroup() {

@@ -65,7 +65,7 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer> {
         Departamento departamento = null;
 
         try {
-            departamento = em.find(Departamento.class, departamento);
+            departamento = em.find(Departamento.class, codigo);
         } catch (Exception e) {
             System.err.println(e);
         } finally {

@@ -12,13 +12,15 @@
         <menus>
           <Menu mnemonicParsing="false" text="Animais">
             <items>
-              <MenuItem fx:id="itemCadastrarAnimal" mnemonicParsing="false" onAction="#acaoCadastarAnimal" text="Cadastrar Animais" />
-                  <MenuItem fx:id="itemEditarAnimal" mnemonicParsing="false" onAction="#acaoEditarAnimal" text="Editar Animais" />
+              <MenuItem fx:id="itemCadastrarAnimal" mnemonicParsing="false" onAction="#acaoCadastarAnimal" text="Cadastrar Animal" />
+                  <MenuItem fx:id="itemEditarAnimal" mnemonicParsing="false" onAction="#acaoEditarAnimal" text="Editar Animal" />
+                  <MenuItem fx:id="itemExcluirAnimal" mnemonicParsing="false" onAction="#acaoExcluirAnimal" text="Excluir Animal" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <Menu fx:id="itemCadastrarEspecie" mnemonicParsing="false" text="Especie">
                     <items>
                       <MenuItem fx:id="itemCadastrarEspecie" mnemonicParsing="false" onAction="#acaoCadastrarEspecie" text="Cadastrar Especie" />
                         <MenuItem fx:id="itemEditarEspecie" mnemonicParsing="false" onAction="#acaoEditarEspecie" text="Editar Especie" />
+                        <MenuItem fx:id="itemExcluirEspecie" mnemonicParsing="false" onAction="#acaoExcluirEspecie" text="Excluir Especie" />
                     </items>
                   </Menu>
                   <SeparatorMenuItem mnemonicParsing="false" />
@@ -26,6 +28,7 @@
                     <items>
                       <MenuItem fx:id="itemCadastrarFamilia" mnemonicParsing="false" onAction="#acaoCadastrarFamilia" text="Cadastrar Familia" />
                         <MenuItem fx:id="itemEditarFamilia" mnemonicParsing="false" onAction="#acaoEditarFamilia" text="Editar Familia" />
+                        <MenuItem fx:id="itemExcluirFamilia" mnemonicParsing="false" onAction="#acaoExcluirFamilia" text="Excluir Familia" />
                     </items>
                   </Menu>
                   <SeparatorMenuItem mnemonicParsing="false" />
@@ -33,24 +36,30 @@
                     <items>
                       <MenuItem fx:id="itemCadastrarClasse" mnemonicParsing="false" onAction="#acaoCadastrarClasse" text="Cadastrar Classe" />
                         <MenuItem fx:id="itemEditarClasse" mnemonicParsing="false" onAction="#acaoEditarClasse" text="Editar Classe" />
+                        <MenuItem fx:id="itemExcluirClasse" mnemonicParsing="false" onAction="#acaoExcluirClasse" text="Excluir Classe" />
                     </items>
                   </Menu>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Vendas">
+          <Menu mnemonicParsing="false" text="Vendas Ingressos">
             <items>
-              <MenuItem fx:id="itemCadastrarVenda" mnemonicParsing="false" onAction="#acaoCadastrarVenda" text="Cadastrar Vendas" />
-                  <MenuItem fx:id="itemEditarVenda" mnemonicParsing="false" onAction="#acaoEditarVenda" text="Editar Vendas" />
+              <MenuItem fx:id="itemCadastrarVenda" mnemonicParsing="false" onAction="#acaoCadastrarVenda" text="Cadastrar Venda" />
+                  <MenuItem fx:id="itemEditarVenda" mnemonicParsing="false" onAction="#acaoEditarVenda" text="Registrar Uso Ingresso" />
+                  <MenuItem fx:id="itemExcluirVenda" mnemonicParsing="false" onAction="#acaoExcluirVenda" text="Excluir Venda" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Funcionario">
               <items>
                 <MenuItem fx:id="itemCadastrarFuncionario" mnemonicParsing="false" onAction="#acaoCadastrarFuncionario" text="Cadastrar Funcionarios" />
+                  <MenuItem fx:id="itemEditarFuncionario" mnemonicParsing="false" onAction="#acaoEditarFuncionario" text="Editar Funcionario" />
+                  <MenuItem fx:id="itemExcluirFuncionario" mnemonicParsing="false" onAction="#acaoExcluirFuncionario" text="Excluir Funcionario" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Departamento">
               <items>
                 <MenuItem fx:id="itemCadastrarDepartamento" mnemonicParsing="false" onAction="#acaoCadastrarDepartamento" text="Cadastrar Departamento" />
+                  <MenuItem fx:id="itemEditarDepartamento" mnemonicParsing="false" onAction="#acaoEditarDepartamento" text="Editar Departamento" />
+                  <MenuItem fx:id="itemExcluirDepartamento" mnemonicParsing="false" onAction="#acaoExcluirDepartamento" text="Excluir Departamento" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Config" />

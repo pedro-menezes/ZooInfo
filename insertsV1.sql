@@ -58,3 +58,12 @@ INSERT INTO `zooinfo`.`especie` (`codigo`, `descricaoEspecie`, `nomeEspecie`, `f
 INSERT INTO `zooinfo`.`especie` (`codigo`, `descricaoEspecie`, `nomeEspecie`, `famCodigo`) VALUES ('8', 'Distingue-se pela coloração viva, onde sobressaem a fronte e a coroa vermelhas. Em torno dos olhos e na base do bico tem pele nua rosada. Não existe dimorfismo sexual evidente, machos e fêmeas não se distinguem por observação.', 'Arara-de-fronte-vermelha', '12');
 INSERT INTO `zooinfo`.`especie` (`codigo`, `descricaoEspecie`, `nomeEspecie`, `famCodigo`) VALUES ('9', 'Apresenta tipicamente cauda curta, tufos de pêlos negros em forma de pincel na extremidade das orelhas e membros longos. O lince-ibérico, apresenta um padrão de pintas negras muito denso, e os tufos de pêlo em cada lado da face.', 'Lince-ibérico', '30');
 INSERT INTO `zooinfo`.`especie` (`codigo`, `descricaoEspecie`, `nomeEspecie`, `famCodigo`) VALUES ('10', 'É um antílope de tamanho médio. Distingue-se pela risca longitudinal de pelo negro no focinho, junto aos olhos. Só o macho tem cornos, que são voltados para trás, em forma de lira e com espessos anéis concêntricos.', 'Impala-de-face-negra', '27'); 
+
+INSERT INTO `zooinfo`.`departamento` (`codigo`, `nomeDepto`) VALUES ('1', 'Administração');
+INSERT INTO `zooinfo`.`departamento` (`codigo`, `nomeDepto`) VALUES ('2', 'Limpeza');
+INSERT INTO `zooinfo`.`departamento` (`codigo`, `nomeDepto`) VALUES ('3', 'Biologia');
+INSERT INTO `zooinfo`.`departamento` (`codigo`, `nomeDepto`) VALUES ('4', 'Veterinária');
+INSERT INTO `zooinfo`.`departamento` (`codigo`, `nomeDepto`) VALUES ('5', 'Vendas');
+
+INSERT INTO `zooinfo`.`login` (`user`, `senha`) VALUES ('user', 'senha');
+

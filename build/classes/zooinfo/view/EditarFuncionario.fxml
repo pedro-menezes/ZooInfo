@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="768.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.EditarFuncionarioController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="799.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.EditarFuncionarioController">
     <stylesheets>
         <URL value="@editarfuncionario.css" />
     </stylesheets>
@@ -35,11 +35,11 @@
       <Text layoutX="31.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF" wrappingWidth="32.619140625" />
       <DatePicker fx:id="dataNascimento" layoutX="139.0" layoutY="307.0" prefHeight="25.0" prefWidth="182.0" styleClass="campos_entrada" />
       <TextField fx:id="textSalario" layoutX="485.0" layoutY="471.0" prefHeight="29.0" prefWidth="285.0" styleClass="campos_entrada" />
-      <TextField fx:id="textUser" layoutX="83.0" layoutY="367.0" prefHeight="25.0" prefWidth="238.0" styleClass="campos_entrada" />
+      <TextField fx:id="textUser" editable="false" layoutX="75.0" layoutY="388.0" prefHeight="29.0" prefWidth="245.0" styleClass="campos_entrada" />
       <Text layoutX="371.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salário" wrappingWidth="54.619140625" />
       <Text layoutX="21.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data de Nascimento" wrappingWidth="117.619140625" />
       <Text layoutX="32.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sexo" wrappingWidth="32.619140625" />
-      <Text layoutX="33.0" layoutY="386.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User" wrappingWidth="32.619140625" />
+      <Text layoutX="25.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User" wrappingWidth="32.619140625" />
       <TextField fx:id="textLogradouro" layoutX="495.0" layoutY="150.0" prefHeight="25.0" prefWidth="285.0" styleClass="campos_entrada" />
       <TextField fx:id="textNumero" layoutX="494.0" layoutY="201.0" prefHeight="25.0" prefWidth="87.0" styleClass="campos_entrada" />
       <TextField fx:id="textBairro" layoutX="494.0" layoutY="245.0" prefHeight="25.0" prefWidth="285.0" styleClass="campos_entrada" />
@@ -56,13 +56,13 @@
       <RadioButton fx:id="radioF" layoutX="220.0" layoutY="258.0" mnemonicParsing="false" text="Feminino" />
       <ComboBox fx:id="comboDepartamento" layoutX="485.0" layoutY="423.0" prefHeight="29.0" prefWidth="285.0" />
       <Text layoutX="371.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Departamento" />
-      <Separator layoutX="356.0" layoutY="145.0" orientation="VERTICAL" prefHeight="251.0" prefWidth="0.0" />
-      <Text layoutX="33.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha" wrappingWidth="42.18499755859375" />
-      <TextField fx:id="textSenha" layoutX="83.0" layoutY="423.0" prefHeight="25.0" prefWidth="238.0" styleClass="campos_entrada" />
-      <Separator layoutX="39.0" layoutY="409.0" prefHeight="0.0" prefWidth="766.0" />
+      <Separator layoutX="356.0" layoutY="145.0" orientation="VERTICAL" prefHeight="230.0" prefWidth="15.0" />
+      <Separator layoutY="375.0" prefHeight="9.0" prefWidth="766.0" />
       <Button fx:id="buttonCancelar" layoutX="25.0" layoutY="534.0" mnemonicParsing="false" onAction="#acaoCancelar" prefHeight="34.0" prefWidth="264.0" text="Cancelar" />
       <Button fx:id="buttonSalvar" layoutX="491.0" layoutY="534.0" mnemonicParsing="false" onAction="#acaoSalvar" prefHeight="34.0" prefWidth="264.0" text="Salvar" />
       <DatePicker fx:id="dataAdmissao" layoutX="138.0" layoutY="473.0" prefHeight="25.0" prefWidth="182.0" styleClass="campos_entrada" />
       <Text layoutX="24.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data de Admissão" wrappingWidth="117.619140625" />
+      <Text layoutX="27.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha" wrappingWidth="42.18499755859375" />
+      <TextField fx:id="textSenha" layoutX="74.0" layoutY="431.0" prefHeight="29.0" prefWidth="245.0" styleClass="campos_entrada" />
    </children>
 </AnchorPane>

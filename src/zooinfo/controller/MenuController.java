@@ -156,6 +156,106 @@ public class MenuController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    void acaoEditarDepartamento(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/EditarDepartamento.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoEditarFuncionario(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/EditarFuncionario.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoExcluirAnimal(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/ExcluirAnimal.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    
+    @FXML
+    void acaoExcluirEspecie(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/ExcluirEspecie.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoExcluirFamilia(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/ExcluirFamilia.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoExcluirClasse(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/ExcluirClasse.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoExcluirVenda(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/ExcluirVendas.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoExcluirFuncionario(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/ExcluirFuncionario.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoExcluirDepartamento(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/ExcluirDepartamento.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
     /**
      * Initializes the controller class.
      */

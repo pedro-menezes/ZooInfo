@@ -49,6 +49,7 @@ public class FamiliaDAO implements CRUD<Familia, Integer> {
             familiaAux.setCodigo(familia.getCodigo());
             familiaAux.setNomeFamilia(familia.getNomeFamilia());
             familiaAux.setDescricaoFamilia(familia.getDescricaoFamilia());
+            familiaAux.setClasse(familia.getClasse());
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e);

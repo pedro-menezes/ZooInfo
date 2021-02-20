@@ -23,9 +23,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import zooinfo.model.bean.Departamento;
+import zooinfo.model.bean.Endereco;
 import zooinfo.model.bean.Funcionario;
+import zooinfo.model.bean.Login;
 import zooinfo.model.dao.DepartamentoDAO;
+import zooinfo.model.dao.EnderecoDAO;
 import zooinfo.model.dao.FuncionarioDAO;
+import zooinfo.model.dao.LoginDAO;
 
 /**
  * FXML Controller class
@@ -68,9 +72,6 @@ public class EditarFuncionarioController implements Initializable {
     private TextField textNumero;
 
     @FXML
-    private TextField textSenha;
-
-    @FXML
     private TextField textCpf;
 
     @FXML
@@ -78,9 +79,6 @@ public class EditarFuncionarioController implements Initializable {
 
     @FXML
     private Button buttonCancelar;
-
-    @FXML
-    private Button buttonSalvar;
 
     @FXML
     private DatePicker dataNascimento;
@@ -94,16 +92,23 @@ public class EditarFuncionarioController implements Initializable {
     @FXML
     private TextField textBairro;
 
+    @FXML
+    private TextField textSenha;
+
     private Funcionario funcionario;
+    
+    private Login login;
 
     private ObservableList<Departamento> obsList;
+
+    private Endereco endereco;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        preencherCombo();
     }
 
     @FXML
@@ -114,6 +119,30 @@ public class EditarFuncionarioController implements Initializable {
 
     @FXML
     void acaoSalvar(ActionEvent event) {
+        login = new Login();
+        login.setUser(textUser.getText());
+        login.setSenha(textSenha.getText());
+        LoginDAO loginDAO = new LoginDAO();
+        loginDAO.alter(login, login.getUser());
+        
+        endereco.setLogradouro(textLogradouro.getText());
+        endereco.setNumero(Integer.parseInt(textNumero.getText()));
+        endereco.setCep(textCep.getText());
+        endereco.setBairro(textBairro.getText());
+        endereco.setCidade(textCidade.getText());
+        endereco.setEstado(textEstado.getText());
+        EnderecoDAO enderecoDAO = new EnderecoDAO();
+        enderecoDAO.alter(endereco, endereco.getCodigo());
+
+        funcionario.setCpf(textCpf.getText());
+        funcionario.setNome(textNome.getText());
+        funcionario.setSexo(verificaRadio());
+        funcionario.setDataNascimento(getDate(dataNascimento));
+        funcionario.setDataAdmissao(getDate(dataAdmissao));
+        funcionario.setSalario(Double.parseDouble(textSalario.getText()));
+        funcionario.setEndereco(endereco);
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        funcionarioDAO.alter(funcionario, funcionario.getCpf());
     }
 
     @FXML
@@ -132,12 +161,14 @@ public class EditarFuncionarioController implements Initializable {
             textNumero.setText(String.valueOf(funcionario.getEndereco().getNumero()));
             textCep.setText(funcionario.getEndereco().getCep());
             textBairro.setText(funcionario.getEndereco().getBairro());
-            textCidade.setText(funcionario.getEndereco().getEstado());
+            textCidade.setText(funcionario.getEndereco().getCidade());
+            textEstado.setText(funcionario.getEndereco().getEstado());
             comboDepartamento.setValue(funcionario.getDepartamento());
             textSalario.setText(String.valueOf(funcionario.getSalario()));
         } else {
             System.out.println("Não encontrado");
         }
+        getCodigoEndereco();
     }
 
     private void marcarRadio() {
@@ -146,6 +177,13 @@ public class EditarFuncionarioController implements Initializable {
         } else {
             radioF.setSelected(true);
         }
+    }
+
+    public char verificaRadio() {
+        if (radioM.isSelected()) {
+            return 'M';
+        }
+        return 'F';
     }
 
     private void preencherCombo() {
@@ -158,5 +196,25 @@ public class EditarFuncionarioController implements Initializable {
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         return date;
+    }
+
+    private void getCodigoEndereco() {
+        endereco = new Endereco();
+        int numero = Integer.parseInt(textNumero.getText());
+        endereco.setNumero(numero);
+        endereco.setCep(textCep.getText());
+        endereco.setLogradouro(textLogradouro.getText());
+        endereco.setBairro(textBairro.getText());
+        endereco.setCidade(textCidade.getText());
+        endereco.setEstado(textEstado.getText());
+        EnderecoDAO enderecoDAO = new EnderecoDAO();
+
+        Integer enderecoId = enderecoDAO.find(endereco);
+
+        if (enderecoId == null) {
+            System.out.println("NULL");
+        }
+        enderecoId = enderecoDAO.find(endereco);
+        endereco.setCodigo(enderecoId);
     }
 }
