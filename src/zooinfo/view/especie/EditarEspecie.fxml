@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="446.0" prefWidth="699.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.especie.EditarEspecieController">
+   <children>
+      <Text fill="#733924" layoutX="45.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Espécie">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Text fill="#733924" layoutX="45.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Procurar Espécie" />
+      <Text fill="#733924" layoutX="45.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome da Espécie" />
+      <TextField fx:id="textNome" layoutX="158.0" layoutY="150.0" prefHeight="34.0" prefWidth="499.0" style="-fx-border-color: #733924; -fx-background-radius: 50; -fx-border-radius: 50;" />
+      <Button fx:id="buttonCancelar" layoutX="45.0" layoutY="377.0" mnemonicParsing="false" onAction="#acaoCancelar" prefHeight="34.0" prefWidth="264.0" style="-fx-background-color: #733924; -fx-border-radius: 50; -fx-background-radius: 50;" text="Cancelar" textFill="WHITE" />
+      <Button fx:id="buttonSalvar" layoutX="393.0" layoutY="377.0" mnemonicParsing="false" onAction="#acaoSalvar" prefHeight="34.0" prefWidth="264.0" style="-fx-background-color: #733924; -fx-border-radius: 50; -fx-background-radius: 50;" text="Salvar" textFill="WHITE" />
+      <TextField fx:id="textCodigo" layoutX="157.0" layoutY="94.0" prefHeight="34.0" prefWidth="407.0" promptText="Código" style="-fx-border-color: #733924; -fx-background-radius: 50; -fx-border-radius: 50;" />
+      <Button fx:id="buttonPesquisar" layoutX="573.0" layoutY="94.0" mnemonicParsing="false" onAction="#acaoPesquisar" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #733924; -fx-border-radius: 50; -fx-background-radius: 50;" text="Pesquisar" textFill="WHITE" />
+      <Label layoutX="48.0" layoutY="336.0" text="Selecionar a família vinculada" textFill="#733924" />
+      <ComboBox fx:id="comboFamilia" layoutX="236.0" layoutY="328.0" prefHeight="34.0" prefWidth="421.0" style="-fx-background-color: #733924; -fx-border-radius: 50; -fx-background-radius: 50;" />
+      <Label layoutX="48.0" layoutY="248.0" text="Descriçao" textFill="#733924" />
+      <TextArea fx:id="textDescricao" layoutX="158.0" layoutY="194.0" prefHeight="126.0" prefWidth="499.0" style="-fx-border-color: #733924;" />
+   </children>
+</AnchorPane>

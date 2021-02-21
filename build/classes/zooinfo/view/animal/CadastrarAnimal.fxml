@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="274.0" prefWidth="698.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.animal.CadastrarAnimalController">
+   <children>
+      <TextField fx:id="textNome" layoutX="65.0" layoutY="85.0" prefHeight="29.0" prefWidth="275.0" style="-fx-background-radius: 50; -fx-border-color: #733924; -fx-border-radius: 50;" />
+      <DatePicker fx:id="datePicker" layoutX="481.0" layoutY="85.0" style="-fx-border-color: #733924;" />
+      <ComboBox fx:id="comboBox" layoutX="68.0" layoutY="189.0" prefHeight="29.0" prefWidth="602.0" style="-fx-background-radius: 50; -fx-background-color: #733924;" />
+      <TextField fx:id="textAlimentacao" layoutX="109.0" layoutY="135.0" prefHeight="29.0" prefWidth="231.0" style="-fx-background-radius: 50; -fx-border-color: #733924; -fx-border-radius: 50;" />
+      <TextField fx:id="textQuantidade" layoutX="427.0" layoutY="135.0" prefHeight="29.0" prefWidth="243.0" style="-fx-border-color: #733924; -fx-background-radius: 50; -fx-border-radius: 50;" />
+      <Label layoutX="14.0" layoutY="90.0" text="Nome" textFill="#733924" />
+      <Label layoutX="349.0" layoutY="90.0" text="Data de Nascimento" textFill="#733924" />
+      <Label layoutX="14.0" layoutY="140.0" text="Alimentaçao" textFill="#733924" />
+      <Label layoutX="348.0" layoutY="140.0" text="Quantidade" textFill="#733924" />
+      <Label layoutX="14.0" layoutY="194.0" text="Especie" textFill="#733924" />
+      <Button layoutX="426.0" layoutY="258.0" mnemonicParsing="false" onAction="#acaoCadastrarAnimal" prefHeight="29.0" prefWidth="253.0" style="-fx-background-radius: 50; -fx-background-color: #733924;" text="Cadastrar" textFill="WHITE" />
+      <Button fx:id="buttonCancelar" layoutX="14.0" layoutY="258.0" mnemonicParsing="false" onAction="#acaoFechar" prefHeight="29.0" prefWidth="253.0" style="-fx-background-radius: 50; -fx-background-color: #733924;" text="Cancelar" textFill="WHITE" />
+      <Pane layoutY="6.0" prefHeight="74.0" prefWidth="600.0" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+         <children>
+            <Text fill="#733924" layoutX="25.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastrar Animal">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

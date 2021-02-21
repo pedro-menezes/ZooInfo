@@ -6,12 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="1099.0" style="-fx-background-color: #D9CDBF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.MenuController">
    <children>
-      <ListView fx:id="listView" layoutY="58.0" prefHeight="957.0" prefWidth="1099.0" />
+      <ListView fx:id="listView" layoutY="72.0" prefHeight="943.0" prefWidth="1099.0" style="-fx-background-color: #D9CDBF;" />
       <MenuBar prefHeight="29.0" prefWidth="1099.0" AnchorPane.bottomAnchor="985.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Animais">
+          <Menu mnemonicParsing="false" style="-fx-font-weight: bold;" styleClass="menu" text="Animais">
             <items>
               <MenuItem fx:id="itemCadastrarAnimal" mnemonicParsing="false" onAction="#acaoCadastarAnimal" text="Cadastrar Animal" />
                   <MenuItem fx:id="itemEditarAnimal" mnemonicParsing="false" onAction="#acaoEditarAnimal" text="Editar Animal" />
@@ -19,7 +19,7 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <Menu fx:id="itemCadastrarEspecie" mnemonicParsing="false" text="Especie">
                     <items>
-                      <MenuItem fx:id="itemCadastrarEspecie" mnemonicParsing="false" onAction="#acaoCadastrarEspecie" text="Cadastrar Especie" />
+                        <MenuItem fx:id="itemCadastrarEspecie" mnemonicParsing="false" onAction="#acaoCadastrarEspecie" text="Cadastrar Especie" />
                         <MenuItem fx:id="itemEditarEspecie" mnemonicParsing="false" onAction="#acaoEditarEspecie" text="Editar Especie" />
                         <MenuItem fx:id="itemExcluirEspecie" mnemonicParsing="false" onAction="#acaoExcluirEspecie" text="Excluir Especie" />
                     </items>
@@ -42,31 +42,31 @@
                   </Menu>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Vendas Ingressos">
+          <Menu mnemonicParsing="false" style="-fx-font-weight: bold;" text="Vendas Ingressos">
             <items>
               <MenuItem fx:id="itemCadastrarVenda" mnemonicParsing="false" onAction="#acaoCadastrarVenda" text="Cadastrar Venda" />
                   <MenuItem fx:id="itemEditarVenda" mnemonicParsing="false" onAction="#acaoEditarVenda" text="Registrar Uso Ingresso" />
                   <MenuItem fx:id="itemExcluirVenda" mnemonicParsing="false" onAction="#acaoExcluirVenda" text="Excluir Venda" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Funcionario">
+            <Menu mnemonicParsing="false" style="-fx-font-weight: bold;" text="Funcionario">
               <items>
                 <MenuItem fx:id="itemCadastrarFuncionario" mnemonicParsing="false" onAction="#acaoCadastrarFuncionario" text="Cadastrar Funcionarios" />
                   <MenuItem fx:id="itemEditarFuncionario" mnemonicParsing="false" onAction="#acaoEditarFuncionario" text="Editar Funcionario" />
                   <MenuItem fx:id="itemExcluirFuncionario" mnemonicParsing="false" onAction="#acaoExcluirFuncionario" text="Excluir Funcionario" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Departamento">
+            <Menu mnemonicParsing="false" style="-fx-font-weight: bold;" text="Departamento">
               <items>
                 <MenuItem fx:id="itemCadastrarDepartamento" mnemonicParsing="false" onAction="#acaoCadastrarDepartamento" text="Cadastrar Departamento" />
                   <MenuItem fx:id="itemEditarDepartamento" mnemonicParsing="false" onAction="#acaoEditarDepartamento" text="Editar Departamento" />
                   <MenuItem fx:id="itemExcluirDepartamento" mnemonicParsing="false" onAction="#acaoExcluirDepartamento" text="Excluir Departamento" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Config" />
+            <Menu mnemonicParsing="false" style="-fx-font-weight: bold;" text="Config" />
         </menus>
       </MenuBar>
-      <MenuButton layoutY="29.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="1099.0" text="Listar">
+      <MenuButton layoutY="36.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="1099.0" style="-fx-background-color: #733924; -fx-background-radius: 50; -fx-font-weight: bold;" text="Listar" textFill="WHITE">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#listarAnimais" text="Animais" />
           <MenuItem mnemonicParsing="false" onAction="#listarEspecies" text="Especies" />

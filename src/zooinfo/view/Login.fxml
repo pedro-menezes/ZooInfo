@@ -8,20 +8,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="476.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.LoginControl">
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.LoginControl">
     <children>
-        <TextField fx:id="textUser" layoutX="393.0" layoutY="154.0" prefHeight="29.0" prefWidth="320.0" promptText="user" />
-        <PasswordField fx:id="textSenha" layoutX="393.0" layoutY="216.0" prefHeight="29.0" prefWidth="320.0" promptText="senha" />
-        <Button fx:id="buttonEntrar" layoutX="393.0" layoutY="293.0" mnemonicParsing="false" onAction="#acaoButtonLogin" prefHeight="29.0" prefWidth="320.0" text="Entrar" />
-      <Pane prefHeight="476.0" prefWidth="274.0">
+        <TextField fx:id="textUser" layoutX="393.0" layoutY="154.0" prefHeight="29.0" prefWidth="320.0" promptText="user" style="-fx-background-radius: 50; -fx-border-color: #733924; -fx-border-radius: 50;" />
+        <PasswordField fx:id="textSenha" layoutX="393.0" layoutY="216.0" prefHeight="29.0" prefWidth="320.0" promptText="senha" style="-fx-background-radius: 50; -fx-border-color: #733924; -fx-border-radius: 50;" />
+        <Button fx:id="buttonEntrar" layoutX="393.0" layoutY="293.0" mnemonicParsing="false" onAction="#acaoButtonLogin" prefHeight="29.0" prefWidth="320.0" style="-fx-background-color: #733924; -fx-background-radius: 50;" text="Entrar" textFill="WHITE" />
+      <Pane prefHeight="476.0" prefWidth="274.0" style="-fx-background-color: #BF895A; -fx-border-color: #733924;">
          <children>
-            <Text layoutX="54.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZooInfo">
+            <Text fill="#733924" layoutX="54.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZooInfo">
                <font>
                   <Font size="45.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Text layoutX="393.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
+      <Text fill="#733924" layoutX="393.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
     </children>
 </AnchorPane>
