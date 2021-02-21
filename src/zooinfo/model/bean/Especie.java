@@ -88,6 +88,6 @@ public class Especie implements Serializable {
 
     @Override
     public String toString() {
-        return getNomeEspecie();
+        return getCodigo()+ ": "+getNomeEspecie();
     }
 }

@@ -8,14 +8,30 @@ package zooinfo.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import zooinfo.model.bean.Animal;
+import zooinfo.model.bean.Classe;
+import zooinfo.model.bean.Departamento;
+import zooinfo.model.bean.Especie;
+import zooinfo.model.bean.Familia;
+import zooinfo.model.bean.Funcionario;
+import zooinfo.model.bean.Venda;
+import zooinfo.model.dao.AnimalDAO;
+import zooinfo.model.dao.ClasseDAO;
+import zooinfo.model.dao.DepartamentoDAO;
+import zooinfo.model.dao.EspecieDAO;
+import zooinfo.model.dao.FamiliaDAO;
+import zooinfo.model.dao.FuncionarioDAO;
+import zooinfo.model.dao.VendaDAO;
 
 /**
  * FXML Controller class
@@ -23,6 +39,10 @@ import javafx.stage.Stage;
  * @author pedro-menezes
  */
 public class MenuController implements Initializable {
+
+    @FXML
+    private ListView<Object> listView;
+
 
     @FXML
     private void acaoCadastarAnimal(ActionEvent evt) throws IOException {
@@ -188,8 +208,7 @@ public class MenuController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-    
+
     @FXML
     void acaoExcluirEspecie(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -261,6 +280,47 @@ public class MenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    }
 
+    @FXML
+    void listarAnimais(ActionEvent event) {
+        ObservableList<Object> items = FXCollections.observableArrayList(new AnimalDAO().findAll());
+        listView.setItems(items);
+    }
+
+    @FXML
+    void listarEspecies(ActionEvent event) {
+        ObservableList<Object> items = FXCollections.observableArrayList(new EspecieDAO().findAll());
+        listView.setItems(items);
+    }
+
+    @FXML
+    void listarFamilias(ActionEvent event) {
+        ObservableList<Object> items = FXCollections.observableArrayList(new FamiliaDAO().findAll());
+        listView.setItems(items);
+    }
+
+    @FXML
+    void listarClasses(ActionEvent event) {
+        ObservableList<Object> items = FXCollections.observableArrayList(new ClasseDAO().findAll());
+        listView.setItems(items);
+    }
+
+    @FXML
+    void listarDepartamentos(ActionEvent event) {
+        ObservableList<Object> items = FXCollections.observableArrayList(new DepartamentoDAO().findAll());
+        listView.setItems(items);
+    }
+
+    @FXML
+    void listarFuncionarios(ActionEvent event) {
+        ObservableList<Object> items = FXCollections.observableArrayList(new FuncionarioDAO().findAll());
+        listView.setItems(items);
+    }
+
+    @FXML
+    void listarVendas(ActionEvent event) {
+        ObservableList<Object> items = FXCollections.observableArrayList(new VendaDAO().findAll());
+        listView.setItems(items);
     }
 }

@@ -7,7 +7,6 @@ package zooinfo.model.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -68,5 +67,10 @@ public class Venda implements Serializable {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+    
+     @Override
+    public String toString() {
+        return getCodigo()+ ": "+getDataVenda() + ": " + getFuncionario().getNome();
     }
 }

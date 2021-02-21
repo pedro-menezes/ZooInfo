@@ -79,9 +79,6 @@ public class CadastroFuncionarioController implements Initializable {
     private Button buttonCancelar;
 
     @FXML
-    private Button buttonCadastrar;
-
-    @FXML
     private DatePicker dataNascimento;
 
     @FXML

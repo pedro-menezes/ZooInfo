@@ -8,6 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="zooinfo.controller.MenuController">
    <children>
+      <ListView fx:id="listView" layoutY="58.0" prefHeight="957.0" prefWidth="1099.0" />
       <MenuBar prefHeight="29.0" prefWidth="1099.0" AnchorPane.bottomAnchor="985.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="Animais">
@@ -65,5 +66,16 @@
             <Menu mnemonicParsing="false" text="Config" />
         </menus>
       </MenuBar>
+      <MenuButton layoutY="29.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="1099.0" text="Listar">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#listarAnimais" text="Animais" />
+          <MenuItem mnemonicParsing="false" onAction="#listarEspecies" text="Especies" />
+            <MenuItem mnemonicParsing="false" onAction="#listarFamilias" text="Familias" />
+            <MenuItem mnemonicParsing="false" onAction="#listarClasses" text="Classes" />
+            <MenuItem mnemonicParsing="false" onAction="#listarDepartamentos" text="Departamentos" />
+            <MenuItem mnemonicParsing="false" onAction="#listarFuncionarios" text="Funcionarios" />
+            <MenuItem mnemonicParsing="false" onAction="#listarVendas" text="Vendas" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>

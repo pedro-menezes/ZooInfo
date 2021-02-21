@@ -60,6 +60,6 @@ public class Departamento implements Serializable{
 
     @Override
     public String toString() {
-        return getNomeDepto();
+        return getCodigo() + ": "+getNomeDepto();
     }
 }

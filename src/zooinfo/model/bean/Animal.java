@@ -24,19 +24,19 @@ public class Animal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column
     private String nomeAnimal;
-    
+
     @Column
     private Date dataNascimento;
 
     @ManyToOne
     @JoinColumn(name = "aliCodigo")
     private Alimentacao alimentacao;
-    
+
     @ManyToOne
     @JoinColumn(name = "espCodigo")
     private Especie especie;
@@ -91,5 +91,9 @@ public class Animal implements Serializable {
     public void setEspecie(Especie especie) {
         this.especie = especie;
     }
-    
+
+    @Override
+    public String toString() {
+        return getCodigo()+ ": " + getNomeAnimal() + ": " + getEspecie().getNomeEspecie() + ": " +getAlimentacao().getDescricao();
+    }
 }

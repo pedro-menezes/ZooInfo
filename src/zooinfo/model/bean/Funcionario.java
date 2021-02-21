@@ -135,6 +135,6 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return getNome() + ", " + getCpf();
+        return getCpf()+ ": " +getNome() + ": " +getLogin().getUser()+": "+ getSexo() + ": " +getDataNascimento() + ": "+getDepartamento().getNomeDepto() ;
     }
 }
