@@ -7,7 +7,6 @@ package zooinfo.controller.animal;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,16 +55,7 @@ public class ExcluirAnimalController implements Initializable {
 
     @FXML
     void acaoExcluir(ActionEvent event) {
-        if (vazio()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Excluir Animal");
-            alert.setHeaderText(null);
-            alert.setContentText("Campo código vazio!");
-            alert.onShownProperty().addListener(e -> {
-                Platform.runLater(() -> alert.setResizable(false));
-            });
-            alert.showAndWait();
-        } else {
+        if (!vazio()) {
             AnimalDAO animalDAO = new AnimalDAO();
             animalDAO.remove(animal.getCodigo());
             acaoCancelar(event);
@@ -74,36 +64,27 @@ public class ExcluirAnimalController implements Initializable {
 
     @FXML
     void acaoPesquisa(ActionEvent event) {
-        if (vazio()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Excluir Animal");
-            alert.setHeaderText(null);
-            alert.setContentText("Campo código vazio!");
-            alert.onShownProperty().addListener(e -> {
-                Platform.runLater(() -> alert.setResizable(false));
-            });
-            alert.showAndWait();
-        } else {
+        if (!vazio()) {
             animal = new AnimalDAO().findById(Integer.parseInt(textCodigo.getText()));
-        }
-        
-        if (animal != null) {
-            textDados.setText(animal.getNomeAnimal() + ": " + animal.getEspecie().getNomeEspecie() + "\n"
-                    + animal.getDataNascimento() + "\n" + animal.getAlimentacao().getDescricao() + ": " + animal.getAlimentacao().getQuantidade());
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Busca Animal");
-            alert.setHeaderText(null);
-            alert.setContentText("Animal não encontrado!");
-            alert.onShownProperty().addListener(e -> {
-                Platform.runLater(() -> alert.setResizable(false));
-            });
-            alert.showAndWait();
+
+            if (animal != null) {
+                textDados.setText(animal.getNomeAnimal() + ": " + animal.getEspecie().getNomeEspecie() + "\n"
+                        + animal.getDataNascimento() + "\n" + animal.getAlimentacao().getDescricao() + ": " + animal.getAlimentacao().getQuantidade());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Busca Animal");
+                alert.setContentText("Animal não encontrado!");
+                alert.showAndWait();
+            }
         }
     }
 
     public boolean vazio() {
-        if (textCodigo.equals("")) {
+        if (textCodigo.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Excluir Animal");
+            alert.setContentText("Campo código vazio!");
+            alert.showAndWait();
             return true;
         }
         return false;

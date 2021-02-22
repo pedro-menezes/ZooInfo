@@ -15,16 +15,16 @@ import zooinfo.model.bean.Login;
  *
  * @author pedro-menezes
  */
-public class FuncionarioDAO implements CRUD<Funcionario, String>{
+public class FuncionarioDAO implements CRUD<Funcionario, String> {
 
-   @Override
-   public Funcionario save(Funcionario funcionario) {
+    @Override
+    public Funcionario save(Funcionario funcionario) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
         try {
             em.getTransaction().begin();
-            if (funcionario.getCpf()== null) {
+            if (funcionario.getCpf() == null) {
                 em.merge(funcionario);
             } else {
                 em.persist(funcionario);
@@ -39,7 +39,7 @@ public class FuncionarioDAO implements CRUD<Funcionario, String>{
 
         return funcionario;
     }
-   
+
     public Funcionario alter(Funcionario funcionario, String codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -47,7 +47,7 @@ public class FuncionarioDAO implements CRUD<Funcionario, String>{
         try {
             em.getTransaction().begin();
             Funcionario funcionarioAux = em.find(Funcionario.class, codigo);
-            
+
             funcionarioAux.setCpf(funcionario.getCpf());
             funcionarioAux.setNome(funcionario.getNome());
             funcionarioAux.setDataNascimento(funcionario.getDataNascimento());
@@ -66,7 +66,7 @@ public class FuncionarioDAO implements CRUD<Funcionario, String>{
         return funcionario;
     }
 
-   @Override
+    @Override
     public Funcionario findById(String cpf) {
         EntityManager em = new ConnectionFactory().getConnection();
         Funcionario funcionario = null;
@@ -81,7 +81,7 @@ public class FuncionarioDAO implements CRUD<Funcionario, String>{
         return funcionario;
     }
 
-   @Override
+    @Override
     public List<Funcionario> findAll() {
 
         EntityManager em = new ConnectionFactory().getConnection();
@@ -98,7 +98,7 @@ public class FuncionarioDAO implements CRUD<Funcionario, String>{
         return funcionarios;
     }
 
-   @Override
+    @Override
     public Funcionario remove(String cpf) {
 
         EntityManager em = new ConnectionFactory().getConnection();

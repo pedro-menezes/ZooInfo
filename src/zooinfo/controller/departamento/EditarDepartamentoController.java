@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -37,7 +38,7 @@ public class EditarDepartamentoController implements Initializable {
 
     @FXML
     private TextField textNome;
-    
+
     private Departamento departamento;
 
     @FXML
@@ -48,16 +49,28 @@ public class EditarDepartamentoController implements Initializable {
 
     @FXML
     void acaoSalvar(ActionEvent event) {
-        departamento.setNomeDepto(textNome.getText());
-        
-        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
-        departamentoDAO.alter(departamento, departamento.getCodigo());
+        if (!vazio()) {
+            departamento.setNomeDepto(textNome.getText());
+
+            DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+            departamentoDAO.alter(departamento, departamento.getCodigo());
+        }
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        departamento = new DepartamentoDAO().findById(Integer.parseInt(textCodigo.getText()));
-        textNome.setText(departamento.getNomeDepto());
+        if (!vazio()) {
+            departamento = new DepartamentoDAO().findById(Integer.parseInt(textCodigo.getText()));
+
+            if (departamento != null) {
+                textNome.setText(departamento.getNomeDepto());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Alterar Departamento");
+                alert.setContentText("Não encontrado");
+                alert.showAndWait();
+            }
+        }
     }
 
     /**
@@ -68,4 +81,14 @@ public class EditarDepartamentoController implements Initializable {
         // TODO
     }
 
+    private boolean vazio() {
+        if (textNome.getText().equals("") || textCodigo.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Alterar Departamento");
+            alert.setContentText("Alguma entrada vazia!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
+    }
 }

@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -109,50 +110,52 @@ public class CadastroFuncionarioController implements Initializable {
 
     @FXML
     void acaoCadastrar(ActionEvent event) {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome(textNome.getText());
-        funcionario.setCpf(textCpf.getText());
-        funcionario.setSexo(verificaRadio());
-        funcionario.setDataAdmissao(getDate(dataAdmissao));
-        funcionario.setDataNascimento(getDate(dataNascimento));
-        funcionario.setSalario(Double.parseDouble(textSalario.getText()));
+        if (!vazio()) {
+            Funcionario funcionario = new Funcionario();
+            funcionario.setNome(textNome.getText());
+            funcionario.setCpf(textCpf.getText());
+            funcionario.setSexo(verificaRadio());
+            funcionario.setDataAdmissao(getDate(dataAdmissao));
+            funcionario.setDataNascimento(getDate(dataNascimento));
+            funcionario.setSalario(Double.parseDouble(textSalario.getText()));
 
-        Endereco endereco = new Endereco();
-        endereco.setLogradouro(textLogradouro.getText());
-        int numero = Integer.parseInt(textNumero.getText());
-        endereco.setNumero(numero);
-        endereco.setCep(textCep.getText());
-        endereco.setLogradouro(textLogradouro.getText());
-        endereco.setBairro(textBairro.getText());
-        endereco.setCidade(textCidade.getText());
-        endereco.setEstado(textEstado.getText());
-        EnderecoDAO enderecoDAO = new EnderecoDAO();
+            Endereco endereco = new Endereco();
+            endereco.setLogradouro(textLogradouro.getText());
+            int numero = Integer.parseInt(textNumero.getText());
+            endereco.setNumero(numero);
+            endereco.setCep(textCep.getText());
+            endereco.setLogradouro(textLogradouro.getText());
+            endereco.setBairro(textBairro.getText());
+            endereco.setCidade(textCidade.getText());
+            endereco.setEstado(textEstado.getText());
+            EnderecoDAO enderecoDAO = new EnderecoDAO();
 
-        Integer enderecoId = enderecoDAO.find(endereco);
+            Integer enderecoId = enderecoDAO.find(endereco);
 
-        if (enderecoId == null) {
-            endereco = enderecoDAO.save(endereco);
+            if (enderecoId == null) {
+                endereco = enderecoDAO.save(endereco);
+            }
+            enderecoId = enderecoDAO.find(endereco);
+
+            endereco.setCodigo(enderecoId);
+            funcionario.setEndereco(endereco);
+
+            Login login = new Login();
+            login.setUser(textUser.getText());
+            login.setSenha(textSenha.getText());
+            LoginDAO loginDAO = new LoginDAO();
+
+            if (!loginDAO.exist(login)) {
+                loginDAO.save(login);
+
+                funcionario.setLogin(login);
+                funcionario.setDepartamento(comboDepartamento.getValue());
+
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                funcionarioDAO.save(funcionario);
+            }
+            acaoCancelar(event);
         }
-        enderecoId = enderecoDAO.find(endereco);
-
-        endereco.setCodigo(enderecoId);
-        funcionario.setEndereco(endereco);
-
-        Login login = new Login();
-        login.setUser(textUser.getText());
-        login.setSenha(textSenha.getText());
-        LoginDAO loginDAO = new LoginDAO();
-
-        if (!loginDAO.exist(login)) {
-            loginDAO.save(login);
-
-            funcionario.setLogin(login);
-            funcionario.setDepartamento(comboDepartamento.getValue());
-
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            funcionarioDAO.save(funcionario);
-        }
-        acaoCancelar(event);
     }
 
     public void addGroup() {
@@ -179,5 +182,19 @@ public class CadastroFuncionarioController implements Initializable {
     private void preencherCombo() {
         obsList = FXCollections.observableArrayList(new DepartamentoDAO().findAll());
         comboDepartamento.setItems(obsList);
+    }
+
+    private boolean vazio() {
+        if (textNome.getText().equals("") || textCpf.getText().equals("") || textUser.getText().equals("") || textSenha.getText().equals("")
+                || dataNascimento.getValue() == null || dataAdmissao.getValue() == null || textSalario.getText().equals("") || dataAdmissao.getValue().equals("")
+                || textLogradouro.getText().equals("") || textNumero.getText().equals("") || textBairro.getText().equals("") || textCep.getText().equals("")
+                || textEstado.getText().equals("") || (radioF.isSelected() == false && radioM.isSelected() == false) || comboDepartamento.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Cadastrar Família");
+            alert.setContentText("Algum campo vazio!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
     }
 }

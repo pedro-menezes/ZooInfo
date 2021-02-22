@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -57,24 +58,34 @@ public class ExcluirFamiliaController implements Initializable {
 
     @FXML
     void acaoExcluir(ActionEvent event) {
-        if (existEspecie()) {
-            FamiliaDAO familiaDAO = new FamiliaDAO();
-            familiaDAO.remove(familia.getCodigo());
-        } else {
-            System.out.println("Existe espécie dessa familia cadastrado.");
+        if (!vazio()) {
+            if (existEspecie()) {
+                FamiliaDAO familiaDAO = new FamiliaDAO();
+                familiaDAO.remove(familia.getCodigo());
+                acaoCancelar(event);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Excluir Família");
+                alert.setContentText("Existe espécie dessa familia cadastrado.");
+                alert.showAndWait();
+            }
         }
-        acaoCancelar(event);
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        familia = new FamiliaDAO().findById(Integer.parseInt(textCodigo.getText()));
+        if (!vazio()) {
+            familia = new FamiliaDAO().findById(Integer.parseInt(textCodigo.getText()));
 
-        if (familia != null) {
-            textDados.setText(familia.getNomeFamilia()+ ": " + familia.getClasse().getNomeClasse()+ "\n"
-                    + familia.getDescricaoFamilia());
-        } else {
-            System.out.println("Não encontrado");
+            if (familia != null) {
+                textDados.setText(familia.getNomeFamilia() + ": " + familia.getClasse().getNomeClasse() + "\n"
+                        + familia.getDescricaoFamilia());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Excluir Família");
+                alert.setContentText("Não encontrado!");
+                alert.showAndWait();
+            }
         }
     }
 
@@ -88,5 +99,15 @@ public class ExcluirFamiliaController implements Initializable {
         }
         return true;
     }
-}
 
+    private boolean vazio() {
+        if (textCodigo.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Excluir Família");
+            alert.setContentText("Entra do código vazia!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
+    }
+}

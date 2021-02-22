@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import zooinfo.model.bean.Alimentacao;
 import zooinfo.model.bean.Animal;
@@ -70,11 +71,7 @@ public class CadastrarAnimalController implements Initializable {
         if (vazio()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Cadastrar Animal");
-            alert.setHeaderText(null);
             alert.setContentText("Alguma entrada vazia!");
-            alert.onShownProperty().addListener(e -> {
-                Platform.runLater(() -> alert.setResizable(false));
-            });
             alert.showAndWait();
         } else {
             Animal animal = new Animal();

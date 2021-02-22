@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -70,27 +71,32 @@ public class EditarEspecieController implements Initializable {
 
     @FXML
     void acaoSalvar(ActionEvent event) {
-        especie.setCodigo(Integer.parseInt(textCodigo.getText()));
-        especie.setDescricaoEspecie(textDescricao.getText());
-        especie.setNomeEspecie(textNome.getText());
-        especie.setFamilia(comboFamilia.getValue());
+        if (!vazio()) {
+            especie.setCodigo(Integer.parseInt(textCodigo.getText()));
+            especie.setDescricaoEspecie(textDescricao.getText());
+            especie.setNomeEspecie(textNome.getText());
+            especie.setFamilia(comboFamilia.getValue());
 
-        EspecieDAO especieDAO = new EspecieDAO();
+            EspecieDAO especieDAO = new EspecieDAO();
 
-        especieDAO.alter(especie, especie.getCodigo());
-        acaoCancelar(event);
+            especieDAO.alter(especie, especie.getCodigo());
+            acaoCancelar(event);
+        }
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
         especie = new EspecieDAO().findById(Integer.parseInt(textCodigo.getText()));
-        
+
         if (especie != null) {
             textNome.setText(especie.getNomeEspecie());
             textDescricao.setText(especie.getDescricaoEspecie());
             comboFamilia.setValue(especie.getFamilia());
         } else {
-            System.out.println("Não encontrado");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Alterar Especie");
+            alert.setContentText("Não encontrado");
+            alert.showAndWait();
         }
     }
 
@@ -99,4 +105,14 @@ public class EditarEspecieController implements Initializable {
         comboFamilia.setItems(obsList);
     }
 
+    private boolean vazio() {
+        if (textNome.getText().equals("") || textCodigo.getText().equals("") || comboFamilia.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Alterar Especie");
+            alert.setContentText("Alguma entrada vazia!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
+    }
 }

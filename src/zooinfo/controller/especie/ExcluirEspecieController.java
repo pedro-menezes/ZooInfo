@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -57,24 +58,34 @@ public class ExcluirEspecieController implements Initializable {
 
     @FXML
     void acaoExcluir(ActionEvent event) {
-        if (existAnimal()) {
-            EspecieDAO especieDAO = new EspecieDAO();
-            especieDAO.remove(especie.getCodigo());
-        } else {
-            System.out.println("Existe animal dessa espécie cadastrado.");
+        if (!vazio()) {
+            if (existAnimal()) {
+                EspecieDAO especieDAO = new EspecieDAO();
+                especieDAO.remove(especie.getCodigo());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Excluir Espécie");
+                alert.setContentText("Existe um animal dessa espécie cadastrado.");
+                alert.showAndWait();
+            }
+            acaoCancelar(event);
         }
-        acaoCancelar(event);
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        especie = new EspecieDAO().findById(Integer.parseInt(textCodigo.getText()));
+        if (!vazio()) {
+            especie = new EspecieDAO().findById(Integer.parseInt(textCodigo.getText()));
 
-        if (especie != null) {
-            textDados.setText(especie.getNomeEspecie() + ": " + especie.getFamilia().getNomeFamilia() + "\n"
-                    + especie.getDescricaoEspecie());
-        } else {
-            System.out.println("Não encontrado");
+            if (especie != null) {
+                textDados.setText(especie.getNomeEspecie() + ": " + especie.getFamilia().getNomeFamilia() + "\n"
+                        + especie.getDescricaoEspecie());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Excluir Espécie");
+                alert.setContentText("Não encontrado.");
+                alert.showAndWait();
+            }
         }
     }
 
@@ -87,5 +98,16 @@ public class ExcluirEspecieController implements Initializable {
             }
         }
         return true;
+    }
+
+    private boolean vazio() {
+        if (textCodigo.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Excluir Especie");
+            alert.setContentText("Entra do código vazia!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
     }
 }

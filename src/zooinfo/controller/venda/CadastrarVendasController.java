@@ -16,10 +16,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import zooinfo.model.bean.Funcionario;
 import zooinfo.model.bean.Venda;
@@ -49,14 +49,16 @@ public class CadastrarVendasController implements Initializable {
 
     @FXML
     private void acaoCadastrar(ActionEvent evt) {
-        Venda venda = new Venda();
-        venda.setDataVenda(getDate());
-        venda.setFuncionario(comboFuncionario.getValue());
+        if (!vazio()) {
+            Venda venda = new Venda();
+            venda.setDataVenda(getDate());
+            venda.setFuncionario(comboFuncionario.getValue());
 
-        System.out.println(venda);
-        VendaDAO vendaDAO = new VendaDAO();
-        vendaDAO.save(venda);
-        acaoCancelar(evt);
+            System.out.println(venda);
+            VendaDAO vendaDAO = new VendaDAO();
+            vendaDAO.save(venda);
+            acaoCancelar(evt);
+        }
     }
 
     @FXML
@@ -64,7 +66,7 @@ public class CadastrarVendasController implements Initializable {
         Stage stage = (Stage) buttonCancelar.getScene().getWindow();
         stage.close();
     }
-    
+
     /**
      * Initializes the controller class.
      */
@@ -86,5 +88,16 @@ public class CadastrarVendasController implements Initializable {
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
         return date;
+    }
+
+    private boolean vazio() {
+        if (dateVenda.getValue() == null || comboFuncionario.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Cadastra Venda");
+            alert.setContentText("Algum campo vazio!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
     }
 }

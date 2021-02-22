@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
@@ -62,19 +63,35 @@ public class CadastrarFamiliaController implements Initializable {
 
     @FXML
     void acaoCadastrar(ActionEvent event) {
-        Familia familia = new Familia();
-        familia.setNomeFamilia(textNome.getText());
-        familia.setDescricaoFamilia(textDescricao.getText());
-        FamiliaDAO familiaDAO = new FamiliaDAO();
-        if (!familiaDAO.exist(familia)) {
-            familiaDAO.save(familia);
-        } else {
-            System.out.println("Já existe");
+        if (!vazio()) {
+            Familia familia = new Familia();
+            familia.setNomeFamilia(textNome.getText());
+            familia.setDescricaoFamilia(textDescricao.getText());
+            FamiliaDAO familiaDAO = new FamiliaDAO();
+            if (!familiaDAO.exist(familia)) {
+                familiaDAO.save(familia);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Cadastrar Família");
+                alert.setContentText("Já existe!");
+                alert.showAndWait();
+            }
         }
     }
 
     private void preencherCombo() {
         obsList = FXCollections.observableArrayList(new ClasseDAO().findAll());
         comboClasse.setItems(obsList);
+    }
+
+    private boolean vazio() {
+        if (textDescricao.getText().equals("") || textNome.getText().equals("") || comboClasse.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Cadastrar Família");
+            alert.setContentText("Algum campo vazio!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
     }
 }

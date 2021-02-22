@@ -12,6 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import zooinfo.controller.SessaoController;
+import zooinfo.model.bean.Funcionario;
+import zooinfo.model.bean.Gerente;
 
 /**
  *

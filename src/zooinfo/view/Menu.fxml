@@ -49,7 +49,7 @@
                   <MenuItem fx:id="itemExcluirVenda" mnemonicParsing="false" onAction="#acaoExcluirVenda" text="Excluir Venda" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" style="-fx-font-weight: bold;" text="Funcionario">
+            <Menu fx:id="menuFuncionarios" mnemonicParsing="false" style="-fx-font-weight: bold;" text="Funcionario">
               <items>
                 <MenuItem fx:id="itemCadastrarFuncionario" mnemonicParsing="false" onAction="#acaoCadastrarFuncionario" text="Cadastrar Funcionarios" />
                   <MenuItem fx:id="itemEditarFuncionario" mnemonicParsing="false" onAction="#acaoEditarFuncionario" text="Editar Funcionario" />
@@ -63,7 +63,6 @@
                   <MenuItem fx:id="itemExcluirDepartamento" mnemonicParsing="false" onAction="#acaoExcluirDepartamento" text="Excluir Departamento" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" style="-fx-font-weight: bold;" text="Config" />
         </menus>
       </MenuBar>
       <MenuButton layoutY="36.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="1099.0" style="-fx-background-color: #733924; -fx-background-radius: 50; -fx-font-weight: bold;" text="Listar" textFill="WHITE">

@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import zooinfo.model.bean.Classe;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import zooinfo.model.bean.Familia;
 import zooinfo.model.dao.ClasseDAO;
@@ -47,7 +48,7 @@ public class EditarFamiliaController implements Initializable {
     private ObservableList<Classe> obsList;
 
     private Familia familia;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -64,31 +65,50 @@ public class EditarFamiliaController implements Initializable {
 
     @FXML
     void acaoSalvar(ActionEvent event) {
-        familia.setCodigo(Integer.parseInt(textCodigo.getText()));
-        familia.setDescricaoFamilia(textDescricao.getText());
-        familia.setNomeFamilia(textNome.getText());
-        familia.setClasse(comboClasse.getValue());
+        if (!vazio()) {
+            familia.setCodigo(Integer.parseInt(textCodigo.getText()));
+            familia.setDescricaoFamilia(textDescricao.getText());
+            familia.setNomeFamilia(textNome.getText());
+            familia.setClasse(comboClasse.getValue());
 
-        FamiliaDAO familiaDAO = new FamiliaDAO();
+            FamiliaDAO familiaDAO = new FamiliaDAO();
 
-        familiaDAO.alter(familia, familia.getCodigo());
+            familiaDAO.alter(familia, familia.getCodigo());
+            acaoPesquisar(event);
+        }
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        familia = new FamiliaDAO().findById(Integer.parseInt(textCodigo.getText()));
+        if (!vazio()) {
+            familia = new FamiliaDAO().findById(Integer.parseInt(textCodigo.getText()));
 
-        if (familia != null) {
-            textNome.setText(familia.getNomeFamilia());
-            textDescricao.setText(familia.getDescricaoFamilia());
-            comboClasse.setValue(familia.getClasse());
-        } else {
-            System.out.println("Não encontrado");
+            if (familia != null) {
+                textNome.setText(familia.getNomeFamilia());
+                textDescricao.setText(familia.getDescricaoFamilia());
+                comboClasse.setValue(familia.getClasse());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Alterar Especie");
+                alert.setContentText("Não encontrado.");
+                alert.showAndWait();
+            }
         }
     }
 
     private void preencherCombo() {
         obsList = FXCollections.observableArrayList(new ClasseDAO().findAll());
         comboClasse.setItems(obsList);
+    }
+
+    private boolean vazio() {
+        if (textNome.getText().equals("") || textCodigo.getText().equals("") || comboClasse.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Alterar Especie");
+            alert.setContentText("Alguma entrada vazia!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
     }
 }

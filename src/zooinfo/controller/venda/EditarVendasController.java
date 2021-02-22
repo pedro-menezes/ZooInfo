@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -54,20 +55,38 @@ public class EditarVendasController implements Initializable {
 
     @FXML
     void acaoSalvar(ActionEvent event) {
-        venda.setUsado(true);
-        VendaDAO vendaDAO = new VendaDAO();
-        vendaDAO.ingressoUsado(venda, venda.getCodigo());
-        acaoCancelar(event);
+        if (!vazio()) {
+            venda.setUsado(true);
+            VendaDAO vendaDAO = new VendaDAO();
+            vendaDAO.ingressoUsado(venda, venda.getCodigo());
+            acaoCancelar(event);
+        }
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        venda = new VendaDAO().findById(Integer.parseInt(textCodigo.getText()));
-        System.out.println("___ID___ "+venda.getCodigo());
-        if (venda != null) {
-            textDados.setText(venda.getFuncionario().getCpf() + ": " + venda.getFuncionario().getNome() + "\n" + venda.getDataVenda());
-        } else {
-            System.out.println("Não encontrado");
+        if (!vazio()) {
+            venda = new VendaDAO().findById(Integer.parseInt(textCodigo.getText()));
+
+            if (venda != null) {
+                textDados.setText(venda.getFuncionario().getCpf() + ": " + venda.getFuncionario().getNome() + "\n" + venda.getDataVenda());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Editar Venda");
+                alert.setContentText("Não encontrado.");
+                alert.showAndWait();
+            }
         }
+    }
+
+    private boolean vazio() {
+        if (textCodigo.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Editar Venda");
+            alert.setContentText("Campo código vazio!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
     }
 }

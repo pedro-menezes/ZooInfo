@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -40,13 +41,18 @@ public class CadastrarDepartamentoController implements Initializable {
 
     @FXML
     void acaoCadastrar(ActionEvent event) {
-        Departamento departamento = new Departamento();
-        departamento.setNomeDepto(textNome.getText());
-        DepartamentoDAO departamentoDAO = new DepartamentoDAO();
-        if (!departamentoDAO.exist(departamento)) {
-            departamentoDAO.save(departamento);
-        } else {
-            System.out.println("Já existe");
+        if (!vazio()) {
+            Departamento departamento = new Departamento();
+            departamento.setNomeDepto(textNome.getText());
+            DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+            if (!departamentoDAO.exist(departamento)) {
+                departamentoDAO.save(departamento);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Cadastrar Departamento");
+                alert.setContentText("Já existe!");
+                alert.showAndWait();
+            }
         }
     }
 
@@ -58,4 +64,14 @@ public class CadastrarDepartamentoController implements Initializable {
         // TODO
     }
 
+    private boolean vazio() {
+        if (textNome.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Cadastrar Departamento");
+            alert.setContentText("Algum campo vazio!");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
+    }
 }

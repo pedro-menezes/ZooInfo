@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,16 +70,7 @@ public class EditarAnimalController implements Initializable {
 
     @FXML
     void acaoSalvar(ActionEvent event) {
-        if (vazio()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Cadastrar Anila");
-            alert.setHeaderText(null);
-            alert.setContentText("Alguma entrada vazia!");
-            alert.onShownProperty().addListener(e -> {
-                Platform.runLater(() -> alert.setResizable(false));
-            });
-            alert.showAndWait();
-        } else {
+        if (!vazio()) {
             animal.setNomeAnimal(textNome.getText());
             AnimalDAO animalDAO = new AnimalDAO();
 
@@ -107,23 +97,20 @@ public class EditarAnimalController implements Initializable {
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        animal = new AnimalDAO().findById(Integer.parseInt(textCodigo.getText()));
-
-        if (animal != null) {
-            textNome.setText(animal.getNomeAnimal());
-            dateNascimento.setValue(animal.getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            textAlimentacao.setText(animal.getAlimentacao().getDescricao());
-            textQuantidade.setText(Float.toString(animal.getAlimentacao().getQuantidade()));
-            comboEspecie.setValue(animal.getEspecie());
-        } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Editar Animal");
-            alert.setHeaderText(null);
-            alert.setContentText("Animal não encontrado!");
-            alert.onShownProperty().addListener(e -> {
-                Platform.runLater(() -> alert.setResizable(false));
-            });
-            alert.showAndWait();
+        if (!vazio()) {
+            animal = new AnimalDAO().findById(Integer.parseInt(textCodigo.getText()));
+            if (animal != null) {
+                textNome.setText(animal.getNomeAnimal());
+                dateNascimento.setValue(animal.getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                textAlimentacao.setText(animal.getAlimentacao().getDescricao());
+                textQuantidade.setText(Float.toString(animal.getAlimentacao().getQuantidade()));
+                comboEspecie.setValue(animal.getEspecie());
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Editar Animal");
+                alert.setContentText("Animal não encontrado!");
+                alert.showAndWait();
+            }
         }
     }
 
@@ -149,6 +136,11 @@ public class EditarAnimalController implements Initializable {
 
     private boolean vazio() {
         if (textNome.getText().equals("") || textQuantidade.getText().equals("") || textAlimentacao.getText().equals("") || comboEspecie.getValue() == null || dateNascimento.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Editar Animal");
+            alert.setContentText("Alguma entrada vazia!");
+            alert.close();
+            alert.showAndWait();
             return true;
         }
         return false;

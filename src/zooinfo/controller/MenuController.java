@@ -16,7 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 import zooinfo.model.dao.AnimalDAO;
 import zooinfo.model.dao.ClasseDAO;
@@ -35,23 +37,14 @@ public class MenuController implements Initializable {
 
     @FXML
     private ListView<Object> listView;
-
+    
+    @FXML
+    private Menu menuFuncionarios;
 
     @FXML
     private void acaoCadastarAnimal(ActionEvent evt) throws IOException {
         Stage stage = new Stage();
         URL url = getClass().getResource("/zooinfo/view/animal/CadastrarAnimal.fxml");
-        Parent root = FXMLLoader.load(url);
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    void acaoCadastrarFuncionario(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        URL url = getClass().getResource("/zooinfo/view/funcionario/CadastroFuncionario.fxml");
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
 
@@ -192,9 +185,32 @@ public class MenuController implements Initializable {
     }
 
     @FXML
+    void acaoExcluirFuncionario(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/funcionario/ExcluirFuncionario.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
     void acaoExcluirAnimal(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         URL url = getClass().getResource("/zooinfo/view/animal/ExcluirAnimal.fxml");
+        Parent root = FXMLLoader.load(url);
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void acaoCadastrarFuncionario(ActionEvent event) throws IOException {
+
+        Stage stage = new Stage();
+        URL url = getClass().getResource("/zooinfo/view/funcionario/CadastroFuncionario.fxml");
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
 
@@ -247,17 +263,6 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    void acaoExcluirFuncionario(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        URL url = getClass().getResource("/zooinfo/view/funcionario/ExcluirFuncionario.fxml");
-        Parent root = FXMLLoader.load(url);
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
     void acaoExcluirDepartamento(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         URL url = getClass().getResource("/zooinfo/view/departamento/ExcluirDepartamento.fxml");
@@ -273,6 +278,9 @@ public class MenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (!SessaoController.getInstance().getTipo().equals("zooinfo.model.bean.Gerente")) {
+            menuFuncionarios.setVisible(false);
+        }
     }
 
     @FXML
