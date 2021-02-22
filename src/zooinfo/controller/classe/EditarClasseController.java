@@ -75,7 +75,7 @@ public class EditarClasseController implements Initializable {
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        if (!vazio()) {
+        if (!textCodigo.getText().equals("")) {
             classe = new ClasseDAO().findById(Integer.parseInt(textCodigo.getText()));
 
             if (classe != null) {

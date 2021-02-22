@@ -86,17 +86,19 @@ public class EditarEspecieController implements Initializable {
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        especie = new EspecieDAO().findById(Integer.parseInt(textCodigo.getText()));
+        if (!textCodigo.getText().equals("")) {
+            especie = new EspecieDAO().findById(Integer.parseInt(textCodigo.getText()));
 
-        if (especie != null) {
-            textNome.setText(especie.getNomeEspecie());
-            textDescricao.setText(especie.getDescricaoEspecie());
-            comboFamilia.setValue(especie.getFamilia());
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alterar Especie");
-            alert.setContentText("Não encontrado");
-            alert.showAndWait();
+            if (especie != null) {
+                textNome.setText(especie.getNomeEspecie());
+                textDescricao.setText(especie.getDescricaoEspecie());
+                comboFamilia.setValue(especie.getFamilia());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Alterar Especie");
+                alert.setContentText("Não encontrado");
+                alert.showAndWait();
+            }
         }
     }
 

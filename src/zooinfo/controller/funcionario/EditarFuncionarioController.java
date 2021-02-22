@@ -145,12 +145,13 @@ public class EditarFuncionarioController implements Initializable {
             funcionario.setEndereco(endereco);
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
             funcionarioDAO.alter(funcionario, funcionario.getCpf());
+            acaoCancelar(event);
         }
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        if (!vazio()) {
+        if (!textCodigo.getText().equals("")) {
             funcionario = new FuncionarioDAO().findById(textCodigo.getText());
 
             if (funcionario != null) {

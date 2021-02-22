@@ -58,17 +58,17 @@ public class ExcluirDepartamentoController implements Initializable {
 
     @FXML
     void acaoExcluir(ActionEvent event) {
-        if (vazio()) {
+        if (!vazio()) {
             if (existEspecie()) {
                 DepartamentoDAO familiaDAO = new DepartamentoDAO();
                 familiaDAO.remove(departamento.getCodigo());
+                acaoCancelar(event);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Excluir Departamento");
                 alert.setContentText("Existe um funcionário nesse departamento.");
                 alert.showAndWait();
             }
-            acaoCancelar(event);
         }
     }
 

@@ -80,7 +80,7 @@ public class EditarFamiliaController implements Initializable {
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        if (!vazio()) {
+        if (!textCodigo.getText().equals("")) {
             familia = new FamiliaDAO().findById(Integer.parseInt(textCodigo.getText()));
 
             if (familia != null) {

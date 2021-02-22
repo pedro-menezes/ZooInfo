@@ -54,12 +54,13 @@ public class EditarDepartamentoController implements Initializable {
 
             DepartamentoDAO departamentoDAO = new DepartamentoDAO();
             departamentoDAO.alter(departamento, departamento.getCodigo());
+            acaoCancelar(event);
         }
     }
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        if (!vazio()) {
+        if (!textCodigo.getText().equals("")) {
             departamento = new DepartamentoDAO().findById(Integer.parseInt(textCodigo.getText()));
 
             if (departamento != null) {

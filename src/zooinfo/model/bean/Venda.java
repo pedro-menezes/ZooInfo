@@ -71,6 +71,6 @@ public class Venda implements Serializable {
     
      @Override
     public String toString() {
-        return getCodigo()+ ": "+getDataVenda() + ": " + getFuncionario().getNome();
+        return getCodigo()+ ": "+getDataVenda() + ": " + getFuncionario().getNome() + ": "+isUsado();
     }
 }

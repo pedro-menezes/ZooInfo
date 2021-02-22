@@ -45,6 +45,7 @@ public class CadastrarDepartamentoController implements Initializable {
             Departamento departamento = new Departamento();
             departamento.setNomeDepto(textNome.getText());
             DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+            acaoCancelar(event);
             if (!departamentoDAO.exist(departamento)) {
                 departamentoDAO.save(departamento);
             } else {

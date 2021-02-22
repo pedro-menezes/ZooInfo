@@ -65,7 +65,7 @@ public class EditarVendasController implements Initializable {
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        if (!vazio()) {
+        if (!textCodigo.getText().equals("")) {
             venda = new VendaDAO().findById(Integer.parseInt(textCodigo.getText()));
 
             if (venda != null) {

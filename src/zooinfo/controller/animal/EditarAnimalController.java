@@ -97,7 +97,7 @@ public class EditarAnimalController implements Initializable {
 
     @FXML
     void acaoPesquisar(ActionEvent event) {
-        if (!vazio()) {
+        if (!textCodigo.getText().equals("")) {
             animal = new AnimalDAO().findById(Integer.parseInt(textCodigo.getText()));
             if (animal != null) {
                 textNome.setText(animal.getNomeAnimal());
