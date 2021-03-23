@@ -8,6 +8,7 @@ package zooinfo.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
+import zooinfo.model.bean.Animal;
 import zooinfo.model.bean.Especie;
 
 /**
@@ -17,10 +18,15 @@ import zooinfo.model.bean.Especie;
 public class EspecieDAO implements CRUD<Especie, Integer> {
 
     @Override
-    public Especie save(Especie especie) {
+    public boolean save(Especie especie) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-
+        
+        if (caractereEspecial(especie.getNomeEspecie()) == true || especie.getNomeEspecie().equals("")
+            || especie.getDescricaoEspecie().equals("") || especie.getFamilia() == null) {
+    		em.close();
+    		return false;
+    	}
         try {
             em.getTransaction().begin();
             if (especie.getCodigo() == null) {
@@ -36,7 +42,7 @@ public class EspecieDAO implements CRUD<Especie, Integer> {
             em.close();
         }
 
-        return especie;
+        return true;
     }
     
     public Especie alter(Especie especie, int codigo) {
@@ -94,13 +100,17 @@ public class EspecieDAO implements CRUD<Especie, Integer> {
     }
 
     @Override
-    public Especie remove(Integer codigo) {
+    public boolean remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
         Especie especie = null;
 
         try {
             especie = em.find(Especie.class, codigo);
+            if (especie == null || existAnimal(especie) == true) {
+				em.close();
+				return false;
+			}
             em.getTransaction().begin();
             em.remove(especie);
             em.getTransaction().commit();
@@ -110,7 +120,40 @@ public class EspecieDAO implements CRUD<Especie, Integer> {
         } finally {
             em.close();
         }
-        return especie;
+        return true;
+    }
+    
+    public Integer find(Especie especie) {
+        List<Especie> especies = findAll();
+
+        for (Especie especieAux : especies) {
+            if (especie.getDescricaoEspecie().equals(especieAux.getDescricaoEspecie()) && especie.getNomeEspecie().equals(especieAux.getNomeEspecie())) {
+            	return especieAux.getCodigo();
+        	}
+        }
+
+        return null;
+    }
+    
+    public boolean caractereEspecial(String texto) {
+        for (char c : texto.toCharArray()) {
+            if (!Character.isLetter(c)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private boolean existAnimal(Especie especie) {
+        List<Animal> animais = new AnimalDAO().findAll();
+        for (Animal animal : animais) {
+            Especie especieAux = new AnimalDAO().findById(animal.getCodigo()).getEspecie();
+            if (especie.getCodigo() == especieAux.getCodigo()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean exist(Especie especie) {

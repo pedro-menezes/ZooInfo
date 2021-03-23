@@ -17,10 +17,13 @@ import zooinfo.model.bean.Venda;
 public class VendaDAO implements CRUD<Venda, Integer> {
 
     @Override
-    public Venda save(Venda venda) {
+    public boolean save(Venda venda) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-
+        if(venda.getDataVenda() == null || venda.getFuncionario() == null) {
+        	em.close();
+        	return false;
+        }
         try {
             em.getTransaction().begin();
             if (venda.getCodigo() == null) {
@@ -36,7 +39,7 @@ public class VendaDAO implements CRUD<Venda, Integer> {
             em.close();
         }
 
-        return venda;
+        return true;
     }
 
     public Venda ingressoUsado(Venda venda, int codigo) {
@@ -91,13 +94,17 @@ public class VendaDAO implements CRUD<Venda, Integer> {
     }
 
     @Override
-    public Venda remove(Integer codigo) {
+    public boolean remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
         Venda venda = null;
 
         try {
             venda = em.find(Venda.class, codigo);
+            if(venda == null) {
+            	em.close();
+            	return false;
+            }
             em.getTransaction().begin();
             em.remove(venda);
             em.getTransaction().commit();
@@ -107,6 +114,6 @@ public class VendaDAO implements CRUD<Venda, Integer> {
         } finally {
             em.close();
         }
-        return venda;
+        return true;
     }
 }

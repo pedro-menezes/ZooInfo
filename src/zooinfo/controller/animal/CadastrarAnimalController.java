@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import zooinfo.model.bean.Alimentacao;
 import zooinfo.model.bean.Animal;
@@ -68,33 +66,40 @@ public class CadastrarAnimalController implements Initializable {
 
     @FXML
     private void acaoCadastrarAnimal(ActionEvent evt) {
-        if (vazio()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Cadastrar Animal");
-            alert.setContentText("Alguma entrada vazia!");
-            alert.showAndWait();
-        } else {
             Animal animal = new Animal();
             animal.setNomeAnimal(textNome.getText());
-            animal.setDataNascimento(getDate());
+            
+            if (datePicker.getValue() != null) { 
+                animal.setDataNascimento(getDate());
+            }
+            
             animal.setEspecie(comboBox.getValue());
 
             Alimentacao alimentacao = new Alimentacao();
             alimentacao.setDescricao(textAlimentacao.getText());
-            alimentacao.setQuantidade(Float.parseFloat(textQuantidade.getText()));
+            
+            if (!textQuantidade.getText().equals("")) {
+                alimentacao.setQuantidade(Float.parseFloat(textQuantidade.getText()));
+            }
+            
             AlimentacaoDAO alimentacaoDAO = new AlimentacaoDAO();
             alimentacaoDAO.save(alimentacao);
-            int alimentacaoId = alimentacaoDAO.find(alimentacao);
-            alimentacao.setCodigo(alimentacaoId);
+            
+           Integer alimentacaoId = alimentacaoDAO.find(alimentacao);
+            if (alimentacaoId != null) {
+                alimentacao.setCodigo(alimentacaoId);
+            }
 
             animal.setAlimentacao(alimentacao);
 
-            System.out.println(animal);
             AnimalDAO animalDAO = new AnimalDAO();
-            animalDAO.save(animal);
-
-            acaoFechar(new ActionEvent());
-        }
+            boolean save = animalDAO.save(animal);
+            
+            if (!save) {
+                System.out.println("Erro no cadastro");
+            } else {
+                acaoFechar(new ActionEvent());
+            }
     }
 
     @FXML
@@ -118,10 +123,4 @@ public class CadastrarAnimalController implements Initializable {
         return date;
     }
 
-    private boolean vazio() {
-        if (textNome.getText().equals("") || textQuantidade.getText().equals("")  || textAlimentacao.getText().equals("") || comboBox.getValue() == null || datePicker.getValue() == null) {
-            return true;
-        }
-        return false;
-    }
 }

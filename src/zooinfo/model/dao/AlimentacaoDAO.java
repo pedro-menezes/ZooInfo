@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
 import zooinfo.model.bean.Alimentacao;
+import zooinfo.model.bean.Animal;
 
 /**
  *
@@ -17,12 +18,21 @@ import zooinfo.model.bean.Alimentacao;
 public class AlimentacaoDAO implements CRUD<Alimentacao, Integer> {
 
     @Override
-    public Alimentacao save(Alimentacao alimentacao) {
-
+    public boolean save(Alimentacao alimentacao) {
+    	
         EntityManager em = new ConnectionFactory().getConnection();
 
+        if(alimentacao.getQuantidade()<= 0) {
+     	   em.close();
+     	   return false;
+        }
+        if(alimentacao.getDescricao().equals("")) {
+            em.close();
+     	   return false;
+        }
+        
         if (find(alimentacao) == null) {
-            try {
+        	try {
                 em.getTransaction().begin();
                 if (alimentacao.getCodigo() == null) {
                     em.merge(alimentacao);
@@ -37,7 +47,7 @@ public class AlimentacaoDAO implements CRUD<Alimentacao, Integer> {
                 em.close();
             }
         }
-        return alimentacao;
+        return true;
     }
 
     @Override
@@ -73,13 +83,15 @@ public class AlimentacaoDAO implements CRUD<Alimentacao, Integer> {
     }
 
     @Override
-    public Alimentacao remove(Integer codigo) {
-
+    public boolean remove(Integer codigo) {
         EntityManager em = new ConnectionFactory().getConnection();
         Alimentacao alimentacao = null;
-
         try {
-            alimentacao = em.find(Alimentacao.class, codigo);
+        	alimentacao = em.find(Alimentacao.class, codigo);
+        	if (alimentacao == null) {
+				em.close();
+				return false;
+			}
             em.getTransaction().begin();
             em.remove(alimentacao);
             em.getTransaction().commit();
@@ -89,7 +101,7 @@ public class AlimentacaoDAO implements CRUD<Alimentacao, Integer> {
         } finally {
             em.close();
         }
-        return alimentacao;
+        return true;
     }
 
     public Integer find(Alimentacao alimentacao) {

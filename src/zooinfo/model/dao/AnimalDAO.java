@@ -8,6 +8,7 @@ package zooinfo.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
+import zooinfo.model.bean.Alimentacao;
 import zooinfo.model.bean.Animal;
 
 /**
@@ -17,10 +18,15 @@ import zooinfo.model.bean.Animal;
 public class AnimalDAO implements CRUD<Animal, Integer> {
 
     @Override
-    public Animal save(Animal animal) {
+    public boolean save(Animal animal) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-
+        
+        if (caractereEspecial(animal.getNomeAnimal()) == true || animal.getDataNascimento() == null
+            || animal.getEspecie() == null || animal.getNomeAnimal().equals("")) {
+			em.close();
+			return false;
+		}
         try {
             if (animal.getCodigo() == null) {
                 em.persist(animal);
@@ -37,7 +43,7 @@ public class AnimalDAO implements CRUD<Animal, Integer> {
             em.close();
         }
 
-        return animal;
+        return true;
     }
     
     public Animal alter(Animal animal, int codigo) {
@@ -98,13 +104,16 @@ public class AnimalDAO implements CRUD<Animal, Integer> {
     }
 
     @Override
-    public Animal remove(Integer codigo) {
+    public boolean remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
         Animal animal = null;
-
         try {
             animal = em.find(Animal.class, codigo);
+            if (animal == null) {
+				em.close();
+				return false;
+			}
             em.getTransaction().begin();
             em.remove(animal);
             em.getTransaction().commit();
@@ -114,6 +123,29 @@ public class AnimalDAO implements CRUD<Animal, Integer> {
         } finally {
             em.close();
         }
-        return animal;
+        return true;
+    }
+    
+    public Integer find(Animal animal) {
+        List<Animal> animais = findAll();
+
+        for (Animal animalAux : animais) {
+            if (animal.getDataNascimento().equals(animalAux.getDataNascimento()) && animal.getNomeAnimal().equals(animalAux.getNomeAnimal())
+            	&& animal.getEspecie().equals(animalAux.getEspecie())) {
+                return animalAux.getCodigo();
+            }
+        }
+
+        return null;
+    }
+    
+    public boolean caractereEspecial(String texto) {
+        for (char c : texto.toCharArray()) {
+            if (!Character.isLetter(c)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

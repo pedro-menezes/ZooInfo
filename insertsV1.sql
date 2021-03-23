@@ -66,4 +66,7 @@ INSERT INTO `zooinfo`.`departamento` (`codigo`, `nomeDepto`) VALUES ('4', 'Veter
 INSERT INTO `zooinfo`.`departamento` (`codigo`, `nomeDepto`) VALUES ('5', 'Vendas');
 
 INSERT INTO `zooinfo`.`login` (`user`, `senha`) VALUES ('user', 'senha');
+INSERT INTO `zooinfo`.`endereco` (`codigo`, `bairro`, `cep`, `cidade`, `estado`, `logradouro`, `numero`) VALUES ('1', '222', '222', '2222', '222', '222', '222');
+INSERT INTO `zooinfo`.`funcionario` (`DTYPE`, `cpf`, `dataAdmissao`, `dataNascimento`, `nome`, `salario`, `sexo`, `bonusSalarial`, `depCodigo`, `endereco_codigo`, `login_user`) VALUES ('Gerente', '111111', '2020/02/02', '2020/02/02', '11111', '11111', 'M', '1111', '1', '1', 'user');
+
 

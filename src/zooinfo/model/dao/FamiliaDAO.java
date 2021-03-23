@@ -8,6 +8,8 @@ package zooinfo.model.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
+import zooinfo.model.bean.Animal;
+import zooinfo.model.bean.Especie;
 import zooinfo.model.bean.Familia;
 
 /**
@@ -17,10 +19,16 @@ import zooinfo.model.bean.Familia;
 public class FamiliaDAO implements CRUD<Familia, Integer> {
 
     @Override
-    public Familia save(Familia familia) {
+    public boolean save(Familia familia) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
+        if (caractereEspecial(familia.getNomeFamilia()) == true || familia.getNomeFamilia().equals("")
+                || familia.getDescricaoFamilia().equals("") || familia.getClasse() == null) {
+        		em.close();
+        		return false;
+        }
+        
         try {
             em.getTransaction().begin();
             if (familia.getCodigo() == null) {
@@ -36,7 +44,7 @@ public class FamiliaDAO implements CRUD<Familia, Integer> {
             em.close();
         }
 
-        return familia;
+        return true;
     }
     
     public Familia alter(Familia familia, int codigo) {
@@ -92,15 +100,31 @@ public class FamiliaDAO implements CRUD<Familia, Integer> {
 
         return familias;
     }
+    
+    public Integer find(Familia familia) {
+        List<Familia> familias = findAll();
+
+        for (Familia familiaAux : familias) {
+            if (familia.getDescricaoFamilia().equals(familiaAux.getDescricaoFamilia()) && familia.getNomeFamilia().equals(familiaAux.getNomeFamilia())) {
+            	return familiaAux.getCodigo();
+        	}
+        }
+
+        return null;
+    }
 
     @Override
-    public Familia remove(Integer codigo) {
+    public boolean remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
         Familia familia = null;
 
         try {
             familia = em.find(Familia.class, codigo);
+            if (familia == null || existEspecie(familia) == true) {
+				em.close();
+				return false;
+			}
             em.getTransaction().begin();
             em.remove(familia);
             em.getTransaction().commit();
@@ -110,10 +134,31 @@ public class FamiliaDAO implements CRUD<Familia, Integer> {
         } finally {
             em.close();
         }
-        return familia;
+        return true;
     }
     
-     public boolean exist(Familia familia) {
+    public boolean caractereEspecial(String texto) {
+        for (char c : texto.toCharArray()) {
+            if (!Character.isLetter(c)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private boolean existEspecie(Familia familia) {
+        List<Especie> especies = new EspecieDAO().findAll();
+        for (Especie especie : especies) {
+            Familia familiaAux = new EspecieDAO().findById(especie.getCodigo()).getFamilia();
+            if (familia.getCodigo() == familiaAux.getCodigo()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean exist(Familia familia) {
         List<Familia> familias = findAll();
 
         for (Familia familiaAux : familias) {

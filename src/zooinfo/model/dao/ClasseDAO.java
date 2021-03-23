@@ -9,6 +9,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import zooinfo.connection.ConnectionFactory;
 import zooinfo.model.bean.Classe;
+import zooinfo.model.bean.Especie;
+import zooinfo.model.bean.Familia;
 
 /**
  *
@@ -17,10 +19,15 @@ import zooinfo.model.bean.Classe;
 public class ClasseDAO implements CRUD<Classe, Integer>{
 
    @Override
-   public Classe save(Classe classe) {
+   public boolean save(Classe classe) {
 
         EntityManager em = new ConnectionFactory().getConnection();
 
+        if (caractereEspecial(classe.getNomeClasse()) == true || classe.getNomeClasse().equals("")
+                || classe.getDescricaoClasse().equals("")) {
+        		em.close();
+        		return false;
+        }
         try {
             em.getTransaction().begin();
             if (classe.getCodigo() == null) {
@@ -36,7 +43,7 @@ public class ClasseDAO implements CRUD<Classe, Integer>{
             em.close();
         }
 
-        return classe;
+        return true;
     }
    
    public Classe alter(Classe classe, int codigo) {
@@ -93,13 +100,17 @@ public class ClasseDAO implements CRUD<Classe, Integer>{
     }
 
    @Override
-    public Classe remove(Integer codigo) {
+    public boolean remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
         Classe classe = null;
 
         try {
             classe = em.find(Classe.class, codigo);
+            if (classe == null || existFamilia(classe) == true) {
+				em.close();
+				return false;
+			}
             em.getTransaction().begin();
             em.remove(classe);
             em.getTransaction().commit();
@@ -109,9 +120,42 @@ public class ClasseDAO implements CRUD<Classe, Integer>{
         } finally {
             em.close();
         }
-        return classe;
+        return true;
     }
-    
+   
+   public Integer find(Classe classe) {
+       List<Classe> classes = findAll();
+
+       for (Classe classeAux : classes) {
+           if (classe.getDescricaoClasse().equals(classeAux.getDescricaoClasse()) && classe.getNomeClasse().equals(classeAux.getNomeClasse())) {
+           	return classeAux.getCodigo();
+       	}
+       }
+  
+       return null;
+   }
+   
+    public boolean caractereEspecial(String texto) {
+       for (char c : texto.toCharArray()) {
+           if (!Character.isLetter(c)) {
+               return true;
+           }
+       }
+       
+       return false;
+    }
+   
+    private boolean existFamilia(Classe classe) {
+       List<Familia> familias = new FamiliaDAO().findAll();
+       for (Familia familia : familias) {
+           Classe classeAux = new FamiliaDAO().findById(familia.getCodigo()).getClasse();
+           if (classe.getCodigo() == classeAux.getCodigo()) {
+               return true;
+           }
+       }
+       return false;
+    }
+   
      public boolean exist(Classe classe) {
         List<Classe> classes = findAll();
 

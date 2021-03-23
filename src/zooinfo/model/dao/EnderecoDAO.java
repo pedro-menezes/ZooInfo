@@ -17,10 +17,15 @@ import zooinfo.model.bean.Endereco;
 public class EnderecoDAO implements CRUD<Endereco, Integer> {
 
     @Override
-    public Endereco save(Endereco endereco) {
-
+    public boolean save(Endereco endereco) {
         EntityManager em = new ConnectionFactory().getConnection();
-
+        if(endereco.getLogradouro().equals("") || endereco.getNumero() < 0  
+           || endereco.getBairro().equals("") || endereco.getCidade().equals("")
+           || caractereDigito(endereco.getCep()) == false || endereco.getCep().length() != 8
+           || endereco.getCep().equals("") || endereco.getEstado().equals("")) {
+        	em.close();
+        	return false;
+        }
         try {
             em.getTransaction().begin();
             if (endereco.getCodigo() == null) {
@@ -36,7 +41,7 @@ public class EnderecoDAO implements CRUD<Endereco, Integer> {
             em.close();
         }
 
-        return endereco;
+        return true;
     }
     
     public Endereco alter(Endereco endereco, int codigo) {
@@ -96,7 +101,7 @@ public class EnderecoDAO implements CRUD<Endereco, Integer> {
     }
 
     @Override
-    public Endereco remove(Integer codigo) {
+    public boolean remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
         Endereco endereco = null;
@@ -112,7 +117,17 @@ public class EnderecoDAO implements CRUD<Endereco, Integer> {
         } finally {
             em.close();
         }
-        return endereco;
+        return true;
+    }
+    
+    public boolean caractereDigito(String texto) {
+        for (char c : texto.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     public Integer find(Endereco endereco) {

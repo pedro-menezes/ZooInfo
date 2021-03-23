@@ -133,7 +133,7 @@ public class CadastroFuncionarioController implements Initializable {
             Integer enderecoId = enderecoDAO.find(endereco);
 
             if (enderecoId == null) {
-                endereco = enderecoDAO.save(endereco);
+                enderecoDAO.save(endereco);
             }
             enderecoId = enderecoDAO.find(endereco);
 

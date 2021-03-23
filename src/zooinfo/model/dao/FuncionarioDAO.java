@@ -18,10 +18,15 @@ import zooinfo.model.bean.Login;
 public class FuncionarioDAO implements CRUD<Funcionario, String> {
 
     @Override
-    public Funcionario save(Funcionario funcionario) {
+    public boolean save(Funcionario funcionario) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-
+        if(caractereDigito(funcionario.getCpf()) == false || funcionario.getCpf().length() != 11 || funcionario.getNome().equals("")
+           || caractereEspecial(funcionario.getNome()) == true || funcionario.getDataNascimento() == null 
+           || funcionario.getSalario() < 0 || funcionario.getDepartamento() == null || funcionario.getLogin() == null) {
+        		em.close();
+        		return false;
+        }
         try {
             em.getTransaction().begin();
             if (funcionario.getCpf() == null) {
@@ -37,7 +42,7 @@ public class FuncionarioDAO implements CRUD<Funcionario, String> {
             em.close();
         }
 
-        return funcionario;
+        return true;
     }
 
     public Funcionario alter(Funcionario funcionario, String codigo) {
@@ -97,15 +102,39 @@ public class FuncionarioDAO implements CRUD<Funcionario, String> {
 
         return funcionarios;
     }
-
+    
+    public boolean caractereDigito(String texto) {
+        for (char c : texto.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    public boolean caractereEspecial(String texto) {
+        for (char c : texto.toCharArray()) {
+            if (!Character.isLetter(c)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     @Override
-    public Funcionario remove(String cpf) {
+    public boolean remove(String cpf) {
 
         EntityManager em = new ConnectionFactory().getConnection();
         Funcionario funcionario = null;
 
         try {
             funcionario = em.find(Funcionario.class, cpf);
+            if (funcionario == null) {
+				em.close();
+				return false;
+			}
             em.getTransaction().begin();
             em.remove(funcionario);
             em.getTransaction().commit();
@@ -115,6 +144,6 @@ public class FuncionarioDAO implements CRUD<Funcionario, String> {
         } finally {
             em.close();
         }
-        return funcionario;
+        return true;
     }
 }

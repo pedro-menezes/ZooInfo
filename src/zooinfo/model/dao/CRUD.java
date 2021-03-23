@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface CRUD<T, C> {
 
-    public abstract T save(T objeto);
+    public abstract boolean save(T objeto);
 
     public abstract T findById(C codigo);
 
     public abstract List<T> findAll();
 
-    public abstract T remove(C codigo);
+    public abstract boolean remove(C codigo);
 }

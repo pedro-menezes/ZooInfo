@@ -17,10 +17,13 @@ import zooinfo.model.bean.Departamento;
 public class DepartamentoDAO implements CRUD<Departamento, Integer> {
 
     @Override
-    public Departamento save(Departamento departamento) {
+    public boolean save(Departamento departamento) {
 
         EntityManager em = new ConnectionFactory().getConnection();
-
+        if (departamento.getNomeDepto().equals("")) {
+			em.close();
+			return false;
+		}
         try {
             em.getTransaction().begin();
             if (departamento.getCodigo() == null) {
@@ -36,7 +39,7 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer> {
             em.close();
         }
 
-        return departamento;
+        return true;
     }
 
     public Departamento alter(Departamento departamento, int codigo) {
@@ -92,13 +95,17 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer> {
     }
 
     @Override
-    public Departamento remove(Integer codigo) {
+    public boolean remove(Integer codigo) {
 
         EntityManager em = new ConnectionFactory().getConnection();
         Departamento departamento = null;
-
+        
         try {
             departamento = em.find(Departamento.class, codigo);
+            if (departamento == null) {
+    			em.close();
+    			return false;
+    		}
             em.getTransaction().begin();
             em.remove(departamento);
             em.getTransaction().commit();
@@ -108,7 +115,7 @@ public class DepartamentoDAO implements CRUD<Departamento, Integer> {
         } finally {
             em.close();
         }
-        return departamento;
+        return true;
     }
 
     public boolean exist(Departamento departamento) {

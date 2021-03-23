@@ -20,6 +20,7 @@ import zooinfo.model.bean.Gerente;
  *
  * @author pedro-menezes
  */
+// --add-modules javafx.controls,javafx.fxml
 public class Main extends Application {
 
     @Override
