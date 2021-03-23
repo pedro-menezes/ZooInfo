@@ -94,7 +94,7 @@ public class ExcluirFuncionarioController implements Initializable {
         List<Venda> vendas = vendaDAO.findAll();
 
         for (Venda venda : vendas) {
-            if (venda.getFuncionario().getCpf() == funcionario.getCpf()) {
+            if (venda.getFuncionario().getCpf().equals(funcionario.getCpf())) {
                 vendaDAO.remove(venda.getCodigo());
             }
         }

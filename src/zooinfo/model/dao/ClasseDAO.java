@@ -149,7 +149,7 @@ public class ClasseDAO implements CRUD<Classe, Integer>{
        List<Familia> familias = new FamiliaDAO().findAll();
        for (Familia familia : familias) {
            Classe classeAux = new FamiliaDAO().findById(familia.getCodigo()).getClasse();
-           if (classe.getCodigo() == classeAux.getCodigo()) {
+           if (classe.getCodigo().equals(classeAux.getCodigo())) {
                return true;
            }
        }

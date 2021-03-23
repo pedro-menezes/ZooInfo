@@ -149,7 +149,7 @@ public class EspecieDAO implements CRUD<Especie, Integer> {
         List<Animal> animais = new AnimalDAO().findAll();
         for (Animal animal : animais) {
             Especie especieAux = new AnimalDAO().findById(animal.getCodigo()).getEspecie();
-            if (especie.getCodigo() == especieAux.getCodigo()) {
+            if (especie.getCodigo().equals(especieAux.getCodigo())) {
                 return true;
             }
         }

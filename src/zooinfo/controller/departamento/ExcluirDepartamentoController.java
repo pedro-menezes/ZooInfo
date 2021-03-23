@@ -92,7 +92,7 @@ public class ExcluirDepartamentoController implements Initializable {
         List<Funcionario> especies = new FuncionarioDAO().findAll();
         for (Funcionario especieAux : especies) {
             Departamento departamentoAux = new FuncionarioDAO().findById(especieAux.getCpf()).getDepartamento();
-            if (departamento.getCodigo() == departamentoAux.getCodigo()) {
+            if (departamento.getCodigo().equals(departamentoAux.getCodigo())) {
                 return false;
             }
         }

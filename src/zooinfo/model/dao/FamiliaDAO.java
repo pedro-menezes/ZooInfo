@@ -151,7 +151,7 @@ public class FamiliaDAO implements CRUD<Familia, Integer> {
         List<Especie> especies = new EspecieDAO().findAll();
         for (Especie especie : especies) {
             Familia familiaAux = new EspecieDAO().findById(especie.getCodigo()).getFamilia();
-            if (familia.getCodigo() == familiaAux.getCodigo()) {
+            if (familia.getCodigo().equals(familiaAux.getCodigo())) {
                 return true;
             }
         }

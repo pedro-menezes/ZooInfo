@@ -93,7 +93,7 @@ public class ExcluirEspecieController implements Initializable {
         List<Animal> animais = new AnimalDAO().findAll();
         for (Animal animal : animais) {
             Especie especieAux = new AnimalDAO().findById(animal.getCodigo()).getEspecie();
-            if (especie.getCodigo() == especieAux.getCodigo()) {
+            if (especie.getCodigo().equals(especieAux.getCodigo())) {
                 return false;
             }
         }

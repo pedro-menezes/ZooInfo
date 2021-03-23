@@ -93,7 +93,7 @@ public class ExcluirClasseController implements Initializable {
         List<Familia> especies = new FamiliaDAO().findAll();
         for (Familia familiaAux : especies) {
             Classe classeAux = new FamiliaDAO().findById(familiaAux.getCodigo()).getClasse();
-            if (classe.getCodigo() == classeAux.getCodigo()) {
+            if (classe.getCodigo().equals(classeAux.getCodigo())) {
                 return false;
             }
         }
